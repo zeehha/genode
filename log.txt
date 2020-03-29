@@ -1,0 +1,207 @@
+@
+U-Boot SPL 2019.04-04771-g4d377539a1-dirty (Mar 05 2020 - 14:57:16 +0100)
+PMIC:  PFUZE100 ID=0x10
+DDRINFO: start DRAM init
+DDRINFO:ddrphy calibration done
+DDRINFO: ddrmix config done
+Normal Boot
+Trying to boot from MMC2
+
+
+U-Boot 2019.04-04771-g4d377539a1-dirty (Mar 05 2020 - 14:13:51 +0100)
+
+CPU:   Freescale i.MX8MQ rev2.1 1500 MHz (running at 1000 MHz)
+CPU:   Commercial temperature grade (0C to 95C) at 41C
+Reset cause: POR
+Model: Freescale i.MX8MQ EVK
+DRAM:  3 GiB
+TCPC:  Vendor ID [0x1fc9], Product ID [0x5110], Addr [I2C0 0x50]
+MMC:   FSL_SDHC: 0, FSL_SDHC: 1
+Loading Environment from MMC... Run CMD11 1.8V switch
+OK
+No panel detected: default to HDMI
+Display: HDMI (1280x720)
+cdn_api_checkalive: keep-alive counter did not increment for 10us...
+HDMI enable failed!
+In:    serial
+Out:   serial
+Err:   serial
+
+ BuildInfo:
+  - ATF 413e93e
+  - U-Boot 2019.04-04771-g4d377539a1-dirty
+
+Run CMD11 1.8V switch
+switch to partitions #0, OK
+mmc1 is current device
+flash target is MMC:1
+Run CMD11 1.8V switch
+Net:   eth0: ethernet@30be0000
+Fastboot: Normal
+Normal Boot
+Hit any key to stop autoboot:  2  1  0 
+ethernet@30be0000 Waiting for PHY auto negotiation to complete. done
+BOOTP broadcast 1
+BOOTP broadcast 2
+BOOTP broadcast 3
+BOOTP broadcast 4
+DHCP client bound to address 192.168.1.11 (1771 ms)
+Using ethernet@30be0000 device
+TFTP from server 192.168.1.1; our IP address is 192.168.1.11
+Filename 'genode'.
+Load address: 0x60000000
+Loading: *#################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #############################################################
+	 7.6 MiB/s
+done
+Bytes transferred = 9961427 (97ffd3 hex)
+## Booting kernel from Legacy Image at 60000000 ...
+   Image Name:   
+   Image Type:   AArch64 Linux Kernel Image (gzip compressed)
+   Data Size:    9961363 Bytes = 9.5 MiB
+   Load Address: 40010000
+   Entry Point:  40010000
+   Verifying Checksum ... OK
+   Uncompressing Kernel Image ... OK
+
+Starting kernel ...
+
+
+kernel initialized
+ROM modules:
+ ROM: [000000004023e000,000000004023e70b) config
+ ROM: [000000004000f000,0000000040010000) core_log
+ ROM: [000000004023f000,000000004023f655) dtb
+ ROM: [00000000401fc000,000000004023d550) init
+ ROM: [000000004145b000,0000000041505539) initrd
+ ROM: [0000000040136000,00000000401ebc68) ld.lib.so
+ ROM: [0000000040270000,0000000041437200) linux
+ ROM: [000000004157b000,0000000041589970) log_terminal
+ ROM: [0000000041506000,000000004157a5b8) nic_router
+ ROM: [000000004000d000,000000004000e000) platform_info
+ ROM: [00000000401ec000,00000000401fbb48) terminal_crosslink
+ ROM: [0000000041449000,000000004145a770) test-terminal_expect_send
+ ROM: [0000000041438000,0000000041448cd0) timer
+ ROM: [0000000040240000,000000004026ff80) vmm
+
+Genode sculpt-20.02 <local changes>
+3047 MiB RAM and 64533 caps assigned to init
+[init] parent provides
+[init]   service "ROM"
+[init]   service "IRQ"
+[init]   service "IO_MEM"
+[init]   service "PD"
+[init]   service "RM"
+[init]   service "CPU"
+[init]   service "LOG"
+[init]   service "VM"
+[init] child "timer"
+[init]   RAM quota:  776K
+[init]   cap quota:  68
+[init]   ELF binary: timer
+[init]   priority:   0
+[init]   provides service Timer
+[init] child "nic_drv"
+[init]   RAM quota:  7944K
+[init]   cap quota:  68
+[init]   ELF binary: nic_router
+[init]   priority:   0
+[init]   provides service Nic
+[init] child "log_terminal"
+[init]   RAM quota:  1800K
+[init]   cap quota:  68
+[init]   ELF binary: log_terminal
+[init]   priority:   0
+[init]   provides service Terminal
+[init] child "terminal_crosslink"
+[init]   RAM quota:  776K
+[init]   cap quota:  68
+[init]   ELF binary: terminal_crosslink
+[init]   priority:   0
+[init]   provides service Terminal
+[init] child "vmm"
+[init]   RAM quota:  261896K
+[init]   cap quota:  168
+[init]   ELF binary: vmm
+[init]   priority:   1
+[init] child "vm"
+[init]   RAM quota:  776K
+[init]   cap quota:  68
+[init]   ELF binary: test-terminal_expect_send
+[init]   priority:   0
+[init] child "log_terminal" announces service "Terminal"
+[init] child "terminal_crosslink" announces service "Terminal"
+[init] child "timer" announces service "Timer"
+[init] child "nic_drv" announces service "Nic"
+[init -> vmm] Start virtual machine ...
+[init -> vmm] Error: Snapshotter::copy_on_write
+[init -> vmm] Error: STOP
+[init -> vmm] VM state (active) :
+[init -> vmm]   r0         = 0x0000000044000000
+[init -> vmm]   r1         = 0x0000000000000000
+[init -> vmm]   r2         = 0x0000000000000000
+[init -> vmm]   r3         = 0x0000000000000000
+[init -> vmm]   r4         = 0x0000000000000000
+[init -> vmm]   r5         = 0x0000000000000000
+[init -> vmm]   r6         = 0x0000000000000000
+[init -> vmm]   r7         = 0x0000000000000000
+[init -> vmm]   r8         = 0x0000000000000000
+[init -> vmm]   r9         = 0x0000000000000000
+[init -> vmm]   r10         = 0x0000000000000000
+[init -> vmm]   r11         = 0x0000000000000000
+[init -> vmm]   r12         = 0x0000000000000000
+[init -> vmm]   r13         = 0x0000000000000000
+[init -> vmm]   r14         = 0x0000000000000000
+[init -> vmm]   r15         = 0x0000000000000000
+[init -> vmm]   r16         = 0x0000000000000000
+[init -> vmm]   r17         = 0x0000000000000000
+[init -> vmm]   r18         = 0x0000000000000000
+[init -> vmm]   r19         = 0x0000000000000000
+[init -> vmm]   r20         = 0x0000000000000000
+[init -> vmm]   r21         = 0x0000000000000000
+[init -> vmm]   r22         = 0x0000000000000000
+[init -> vmm]   r23         = 0x0000000000000000
+[init -> vmm]   r24         = 0x0000000000000000
+[init -> vmm]   r25         = 0x0000000000000000
+[init -> vmm]   r26         = 0x0000000000000000
+[init -> vmm]   r27         = 0x0000000000000000
+[init -> vmm]   r28         = 0x0000000000000000
+[init -> vmm]   r29         = 0x0000000000000000
+[init -> vmm]   r30         = 0x0000000000000000
+[init -> vmm]   sp         = 0x0000000000000000
+[init -> vmm]   ip         = 0x0000000040080000
+[init -> vmm]   sp_el1     = 0x0000000000000000
+[init -> vmm]   elr_el1    = 0x0000000000000000
+[init -> vmm]   pstate     = 0x00000000000003c5
+[init -> vmm]   exception  = 1024 (aarch64 sync)
+[init -> vmm]   esr_el2    = 0x0000000082000005
+[init -> vmm]   timer.ctl  = 0x00000000
+[init -> vmm]   timer.cmp  = 0x0000000000000000

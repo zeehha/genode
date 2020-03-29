@@ -223,6 +223,9 @@ void Cpu::_handle_sync()
 	case Esr::Ec::BRK:
 		_handle_brk();
 		return;
+  case 0x20: //instruction abort
+        _snapshotter.copy_on_write();
+        return;
 	default:
 		throw Exception("Unknown trap: %x",
 		                Esr::Ec::get(_state.esr_el2));
@@ -355,7 +358,8 @@ Cpu::Cpu(Vm                      & vm,
          Gic                     & gic,
          Genode::Env             & env,
          Genode::Heap            & heap,
-         Genode::Entrypoint      & ep)
+         Genode::Entrypoint      & ep,
+         Snapshotter             & snapshotter)
 : _vm(vm),
   _vm_session(vm_session),
   _heap(heap),
@@ -396,7 +400,8 @@ Cpu::Cpu(Vm                      & vm,
   _sr_oslar           (2, 1, 0, 0, 4, "OSLAR_EL1",        true,  0x0, _reg_tree),
   _sr_sgi1r_el1       (_reg_tree, vm),
   _gic(*this, gic, bus),
-  _timer(env, ep, _gic.irq(27), *this)
+  _timer(env, ep, _gic.irq(27), *this),
+  _snapshotter(snapshotter)
 {
 	_state.pstate     = 0b1111000101; /* el1 mode and IRQs disabled */
 	_state.vmpidr_el2 = cpu_id();

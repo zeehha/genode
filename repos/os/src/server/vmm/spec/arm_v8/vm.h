@@ -61,8 +61,10 @@ class Vmm::Vm
 		Pl011                          _uart;
 		Virtio_console                 _virtio_console;
 		Virtio_net                     _virtio_net;
+        Snapshotter                    _snapshotter;
 
-		void _load_kernel();
+
+    void _load_kernel();
 		void _load_dtb();
 		void _load_initrd();
 
