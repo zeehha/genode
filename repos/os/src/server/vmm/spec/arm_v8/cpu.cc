@@ -17,6 +17,7 @@
 using Vmm::Cpu;
 using Vmm::Gic;
 
+
 Genode::Lock & Vmm::lock() { static Genode::Lock l {}; return l; }
 
 
@@ -223,8 +224,8 @@ void Cpu::_handle_sync()
 	case Esr::Ec::BRK:
 		_handle_brk();
 		return;
-  case 0x20: //instruction abort
-        _snapshotter.copy_on_write();
+    case 0x20: //instruction abort
+        _tester.attach_page(_state.hpfar_el2 << 8);
         return;
 	default:
 		throw Exception("Unknown trap: %x",
@@ -275,8 +276,13 @@ void Cpu::_handle_hyper_call()
 
 void Cpu::_handle_data_abort()
 {
-	_vm.bus().handle_memory_access(*this);
-	_state.ip += sizeof(Genode::uint32_t);
+    Genode::addr_t ipa = ((Genode::addr_t)_state.hpfar_el2 << 8);
+    if (BASE_RAM -1 < ipa && ipa < BASE_RAM + SZ_RAM) {
+        _tester.attach_page(ipa);
+    } else {
+        _vm.bus().handle_memory_access(*this);
+        _state.ip += sizeof(Genode::uint32_t);
+    }
 }
 
 
@@ -359,7 +365,7 @@ Cpu::Cpu(Vm                      & vm,
          Genode::Env             & env,
          Genode::Heap            & heap,
          Genode::Entrypoint      & ep,
-         Snapshotter             & snapshotter)
+         Tester                  & tester)
 : _vm(vm),
   _vm_session(vm_session),
   _heap(heap),
@@ -401,7 +407,7 @@ Cpu::Cpu(Vm                      & vm,
   _sr_sgi1r_el1       (_reg_tree, vm),
   _gic(*this, gic, bus),
   _timer(env, ep, _gic.irq(27), *this),
-  _snapshotter(snapshotter)
+  _tester(tester)
 {
 	_state.pstate     = 0b1111000101; /* el1 mode and IRQs disabled */
 	_state.vmpidr_el2 = cpu_id();

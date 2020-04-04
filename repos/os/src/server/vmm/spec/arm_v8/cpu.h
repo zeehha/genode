@@ -16,8 +16,7 @@
 
 #include <exception.h>
 #include <generic_timer.h>
-#include <snapshotter.h>
-
+#include <tester.h>
 
 #include <base/env.h>
 #include <base/heap.h>
@@ -28,7 +27,7 @@
 namespace Vmm {
 	class Vm;
 	class Cpu;
-    class Snapshotter;
+	class Tester;
     Genode::Lock & lock();
 }
 
@@ -59,7 +58,7 @@ class Vmm::Cpu
 		    Genode::Env             & env,
 		    Genode::Heap            & heap,
 		    Genode::Entrypoint      & ep,
-            Snapshotter             & snapshotter);
+            Tester                  & tester);
 
 		unsigned           cpu_id() const;
 		void               run();
@@ -318,7 +317,7 @@ class Vmm::Cpu
 		Icc_sgi1r_el1                     _sr_sgi1r_el1;
 		Gic::Gicd_banked                  _gic;
 		Generic_timer                     _timer;
-        Snapshotter                     & _snapshotter;
+        Tester                          & _tester;
 
 		void _handle_nothing() {}
 		bool _handle_sys_reg();
