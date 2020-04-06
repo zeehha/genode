@@ -5,24 +5,28 @@ using Vmm::Tester;
 
 void Tester::attach_page(Genode::addr_t fault_addr) {
 
-//    Genode::uint64_t bm = ~(SZ_SUPERPAGE - 1);
-//    fault_addr &= bm;
-//
-//    Genode::log("attach page ", Genode::Hex(fault_addr));
-//
-//    Genode::uint64_t offset = fault_addr - BASE_RAM;
-//    Genode::Vm_session::Attach_attr attr = {
-//            .offset = offset,
-//            .size = SZ_SUPERPAGE,
-//            .writeable = true
-//    };
-//    _vm.attach(_vm_ram.cap(), BASE_RAM + offset, attr);
-//
-//    _page_attached[offset / SZ_SUPERPAGE] = true;
-//    _num_attached_pages++;
-//    if(_num_attached_pages > 4) {
-//        _attach_remaining();
-//    }
+    if (!_attach_pages) {
+        return;
+    }
+
+    Genode::uint64_t bm = ~(SZ_SUPERPAGE - 1);
+    fault_addr &= bm;
+
+    Genode::log("attach page ", Genode::Hex(fault_addr));
+
+    Genode::uint64_t offset = fault_addr - BASE_RAM;
+    Genode::Vm_session::Attach_attr attr = {
+            .offset = offset,
+            .size = SZ_SUPERPAGE,
+            .writeable = true
+    };
+    _vm.attach(_vm_ram.cap(), BASE_RAM + offset, attr);
+
+    _page_attached[offset / SZ_SUPERPAGE] = true;
+    _num_attached_pages++;
+    if(_num_attached_pages > 9) {
+        _attach_remaining();
+    }
 }
 
 void Tester::_attach_remaining() {
@@ -46,55 +50,87 @@ void Tester::_attach_remaining() {
     Genode::log("all pages attached");
 }
 
-void Tester::_detach_all_pages () {
+void Tester::_detach_entirely () {
 
-    _cpu.pause();
+    _vm.detach(BASE_RAM, SZ_RAM);
+    Genode::log("entire detach");
+}
+
+void Tester::_detach_individually() {
+
+    _rdy_for_test = false;
+    _num_attached_pages = 0;
+
+    for (int i = 0; i < NUM_SUPERPAGES; i++) {
+        _vm.detach(BASE_RAM + i*SZ_SUPERPAGE, SZ_SUPERPAGE);
+    }
+
+    Genode::log("individual detach");
+}
+
+void Tester::_prepare_test_env() {
+
+    if (!_rdy_for_test) {
+        _attach_remaining();
+    }
+
     _rdy_for_test = false;
     _num_attached_pages = 0;
 
     for (int i = 0; i < NUM_SUPERPAGES; i++ ) {
         _page_attached[i] = false;
     }
-
-    _vm.detach(BASE_RAM, SZ_RAM);
-    Genode::log("all pages detached");
-    _cpu.run();
-
-}
-
-void Tester::_detach_partially() {
-
-
 }
 
 void Tester::_start_test(Genode::Duration) {
 
-    /* setup environment for testing */
-//    if (!_rdy_for_test) {
-//        _cpu.pause();
-//        _attach_remaining();
-//        _cpu.run();
-//    }
+    _cpu.pause();
+    _prepare_test_env();
 
 
     /* Test 1: (1) detach entire guest ram,
-     *         (2) attach single page on fault
-     *         (3) after 5 pages are attached, attach rest
+     *             this causes constant page faults
      *         */
-    if (_rdy_for_test) {
+    if (TEST_CASE == 1) {
         Genode::log("Start test 1");
-       _detach_all_pages();
+        _detach_entirely();
+        _attach_pages = false;
     }
-
 
     /* Test 2: (1) detach entire guest ram,
      *         (2) attach single page on fault
-     *         (3) after 16 pages are attached, attach rest
+     *         (3) after 10 pages are attached, attach rest
+     *         */
+    if (TEST_CASE == 2) {
+        Genode::log("Start test 2");
+        _detach_entirely();
+        _attach_pages = true;
+
+    }
+
+    /* Test 3: (1) detach guest ram page by page,
+     *             this causes constant page faults
+     *         */
+    if (TEST_CASE == 3) {
+        Genode::log("Start test 3");
+        _detach_individually();
+        _attach_pages = false;
+    }
+
+
+    /* Test 4: (1) detach all pages individually,
+     *         (2) attach single page on fault
+     *         (3) after 10 pages are attached, attach rest
      *         */
 
+    if (TEST_CASE == 4) {
+        Genode::log("Start test 4");
+        _detach_individually();
+        _attach_pages = true;
+    }
 
     _timeout.schedule(Genode::Microseconds(TEN_SECS));
-
+    _cpu.run();
 
 }
 

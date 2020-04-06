@@ -20,6 +20,7 @@
 #define SZ_SUPERPAGE 0x200000
 #define TEN_SECS 10*1000*1000
 #define NUM_SUPERPAGES (SZ_RAM / SZ_SUPERPAGE)
+#define TEST_CASE 1
 
 namespace Vmm {
     class Tester;
@@ -37,13 +38,17 @@ class Vmm::Tester {
         Timer::One_shot_timeout<Tester>  _timeout;
 
         bool _rdy_for_test { true };
+
+        bool _attach_pages { false };
         int  _num_attached_pages;
         bool _page_attached[NUM_SUPERPAGES];
 
         void _attach_remaining();
         void _start_test(Genode::Duration);
-        void _detach_all_pages();
-        void _detach_partially();
+        void _detach_entirely();
+        void _detach_individually();
+
+        void _prepare_test_env();
 
     public:
         Tester (Genode::Env    & env,

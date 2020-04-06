@@ -1,0 +1,1386 @@
+ 
+U-Boot SPL 2019.04-04771-g4d377539a1-dirty (Mar 05 2020 - 14:57:16 +0100)
+PMIC:  PFUZE100 ID=0x10
+DDRINFO: start DRAM init
+DDRINFO:ddrphy calibration done
+DDRINFO: ddrmix config done
+Normal Boot
+Trying to boot from MMC2
+
+
+U-Boot 2019.04-04771-g4d377539a1-dirty (Mar 05 2020 - 14:13:51 +0100)
+
+CPU:   Freescale i.MX8MQ rev2.1 1500 MHz (running at 1000 MHz)
+CPU:   Commercial temperature grade (0C to 95C) at 37C
+Reset cause: POR
+Model: Freescale i.MX8MQ EVK
+DRAM:  3 GiB
+TCPC:  Vendor ID [0x1fc9], Product ID [0x5110], Addr [I2C0 0x50]
+MMC:   FSL_SDHC: 0, FSL_SDHC: 1
+Loading Environment from MMC... Run CMD11 1.8V switch
+OK
+No panel detected: default to HDMI
+Display: HDMI (1280x720)
+cdn_api_checkalive: keep-alive counter did not increment for 10us...
+HDMI enable failed!
+In:    serial
+Out:   serial
+Err:   serial
+
+ BuildInfo:
+  - ATF 413e93e
+  - U-Boot 2019.04-04771-g4d377539a1-dirty
+
+Run CMD11 1.8V switch
+switch to partitions #0, OK
+mmc1 is current device
+flash target is MMC:1
+Run CMD11 1.8V switch
+Net:   eth0: ethernet@30be0000
+Fastboot: Normal
+Normal Boot
+Hit any key to stop autoboot:  2  1  0 
+ethernet@30be0000 Waiting for PHY auto negotiation to complete.. done
+BOOTP broadcast 1
+DHCP client bound to address 192.168.1.11 (3 ms)
+Using ethernet@30be0000 device
+TFTP from server 192.168.1.1; our IP address is 192.168.1.11
+Filename 'genode'.
+Load address: 0x60000000
+Loading: *#################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 ###############################################################
+	 4.4 MiB/s
+done
+Bytes transferred = 9968717 (981c4d hex)
+## Booting kernel from Legacy Image at 60000000 ...
+   Image Name:   
+   Image Type:   AArch64 Linux Kernel Image (gzip compressed)
+   Data Size:    9968653 Bytes = 9.5 MiB
+   Load Address: 40010000
+   Entry Point:  40010000
+   Verifying Checksum ... OK
+   Uncompressing Kernel Image ... OK
+
+Starting kernel ...
+
+
+kernel initialized
+ROM modules:
+ ROM: [0000000040240000,0000000040240710) config
+ ROM: [000000004000e000,000000004000f000) core_log
+ ROM: [0000000040241000,0000000040241665) dtb
+ ROM: [00000000401fe000,000000004023f550) init
+ ROM: [000000004145d000,0000000041507539) initrd
+ ROM: [0000000040138000,00000000401ede80) ld.lib.so
+ ROM: [0000000040272000,0000000041439200) linux
+ ROM: [000000004157e000,000000004158c970) log_terminal
+ ROM: [0000000041508000,000000004157d688) nic_router
+ ROM: [000000004000c000,000000004000d000) platform_info
+ ROM: [00000000401ee000,00000000401fdb48) terminal_crosslink
+ ROM: [000000004144b000,000000004145c770) test-terminal_expect_send
+ ROM: [000000004143a000,000000004144acd0) timer
+ ROM: [0000000040242000,0000000040272000) vmm
+
+Genode sculpt-20.02-74-ga6a5d2bc1 <local changes>
+3047 MiB RAM and 64533 caps assigned to init
+[init] parent provides
+[init]   service "ROM"
+[init]   service "IRQ"
+[init]   service "IO_MEM"
+[init]   service "PD"
+[init]   service "RM"
+[init]   service "CPU"
+[init]   service "LOG"
+[init]   service "VM"
+[init] child "timer"
+[init]   RAM quota:  776K
+[init]   cap quota:  68
+[init]   ELF binary: timer
+[init]   priority:   0
+[init]   provides service Timer
+[init] child "nic_drv"
+[init]   RAM quota:  7944K
+[init]   cap quota:  68
+[init]   ELF binary: nic_router
+[init]   priority:   0
+[init]   provides service Nic
+[init] child "log_terminal"
+[init]   RAM quota:  1800K
+[init]   cap quota:  68
+[init]   ELF binary: log_terminal
+[init]   priority:   0
+[init]   provides service Terminal
+[init] child "terminal_crosslink"
+[init]   RAM quota:  776K
+[init]   cap quota:  68
+[init]   ELF binary: terminal_crosslink
+[init]   priority:   0
+[init]   provides service Terminal
+[init] child "vmm"
+[init]   RAM quota:  261896K
+[init]   cap quota:  168
+[init]   ELF binary: vmm
+[init]   priority:   1
+[init] child "vm"
+[init]   RAM quota:  776K
+[init]   cap quota:  68
+[init]   ELF binary: test-terminal_expect_send
+[init]   priority:   0
+[init] child "log_terminal" announces service "Terminal"
+[init] child "terminal_crosslink" announces service "Terminal"
+[init] child "timer" announces service "Timer"
+[init] child "nic_drv" announces service "Nic"
+Vm_session_component::insert_translation::virt_addr vttbr_el2: 0xffffffd000634000
+Insert_func:CREATE_NEW_TABLE
+_update_cache::addr: 0xffffffd000634008, size: 0x8
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd000635000, size: 0x8
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd000635008, size: 0x8
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd000635010, size: 0x8
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd000635018, size: 0x8
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd000635020, size: 0x8
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd000635028, size: 0x8
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd000635030, size: 0x8
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd000635038, size: 0x8
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd000635040, size: 0x8
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd000635048, size: 0x8
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd000635050, size: 0x8
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd000635058, size: 0x8
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd000635060, size: 0x8
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd000635068, size: 0x8
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd000635070, size: 0x8
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd000635078, size: 0x8
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd000635080, size: 0x8
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd000635088, size: 0x8
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd000635090, size: 0x8
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd000635098, size: 0x8
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd0006350a0, size: 0x8
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd0006350a8, size: 0x8
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd0006350b0, size: 0x8
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd0006350b8, size: 0x8
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd0006350c0, size: 0x8
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd0006350c8, size: 0x8
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd0006350d0, size: 0x8
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd0006350d8, size: 0x8
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd0006350e0, size: 0x8
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd0006350e8, size: 0x8
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd0006350f0, size: 0x8
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd0006350f8, size: 0x8
+insert_translation
+_update_cache::addr: 0xffffffd000635000, size: 0x8
+Insert_func::TABLE_EXISTS
+insert_translation
+_update_cache::addr: 0xffffffd000634000, size: 0x8
+Vm::invalidate_tlb_vm()
+[init -> vmm] Start virtual machine ...
+[init -> log_terminal] [    0.000000] Booting Linux on physical CPU 0x0000000000 [0x410fd034]
+[init -> log_terminal] [    0.000000] Linux version 4.19.53 (cbass@kc87) (gcc version 8.3.0 (GCC)) #1 SMP PREEMPT Wed Jun 19 13:23:18 CEST 2019
+[init -> log_terminal] [    0.000000] Machine model: linux,dummy-virt
+[init -> log_terminal] [    0.000000] earlycon: pl11 at MMIO 0x0000000009000000 (options '')
+[init -> log_terminal] [    0.000000] bootconsole [pl11] enabled
+[init -> log_terminal] [    0.000000] efi: Getting EFI parameters from FDT:
+[init -> log_terminal] [    0.000000] efi: UEFI not found.
+[init -> log_terminal] [    0.000000] cma: Failed to reserve 32 MiB
+[init -> log_terminal] [    0.000000] NUMA: No NUMA configuration found
+[init -> log_terminal] [    0.000000] NUMA: Faking a node at [mem 0x0000000000000000-0x0000000043ffffff]
+[init -> log_terminal] [    0.000000] NUMA: NODE_DATA [mem 0x43ff0b00-0x43ff22bf]
+[init -> log_terminal] [    0.000000] Zone ranges:
+[init -> log_terminal] [    0.000000]   DMA32    [mem 0x0000000040000000-0x0000000043ffffff]
+[init -> log_terminal] [    0.000000]   Normal   empty
+[init -> log_terminal] [    0.000000] Movable zone start for each node
+[init -> log_terminal] [    0.000000] Early memory node ranges
+[init -> log_terminal] [    0.000000]   node   0: [mem 0x0000000040000000-0x0000000043ffffff]
+[init -> log_terminal] [    0.000000] Initmem setup node 0 [mem 0x0000000040000000-0x0000000043ffffff]
+[init -> log_terminal] [    0.000000] random: get_random_bytes called from start_kernel+0x94/0x400 with crng_init=0
+[init -> log_terminal] [    0.000000] percpu: Embedded 23 pages/cpu s56408 r8192 d29608 u94208
+[init -> log_terminal] [    0.000000] Detected VIPT I-cache on CPU0
+[init -> log_terminal] [    0.000000] CPU features: enabling workaround for ARM erratum 843419
+[init -> log_terminal] [    0.000000] CPU features: enabling workaround for ARM erratum 845719
+[init -> log_terminal] [    0.000000] CPU features: detected: Kernel page table isolation (KPTI)
+[init -> log_terminal] [    0.000000] Built 1 zonelists, mobility grouping on.  Total pages: 16128
+[init -> log_terminal] [    0.000000] Policy zone: DMA32
+[init -> log_terminal] [    0.000000] Kernel command line: rdinit=/bin/sh console=hvc0 earlycon=pl011,0x9000000
+[init -> log_terminal] [    0.000000] Memory: 29680K/65536K available (10556K kernel code, 1372K rwdata, 4900K rodata, 1344K init, 380K bss, 35856K reserved, 0K cma-reserved)
+[init -> log_terminal] [    0.000000] SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=1, Nodes=1
+[init -> log_terminal] [    0.000000] rcu: Preemptible hierarchical RCU implementation.
+[init -> log_terminal] [    0.000000] rcu: 	RCU restricting CPUs from NR_CPUS=64 to nr_cpu_ids=1.
+[init -> log_terminal] [    0.000000] 	Tasks RCU enabled.
+[init -> log_terminal] [    0.000000] rcu: Adjusting geometry for rcu_fanout_leaf=16, nr_cpu_ids=1
+[init -> log_terminal] [    0.000000] NR_IRQS: 64, nr_irqs: 64, preallocated irqs: 0
+[init -> log_terminal] [    0.000000] GICv3: Distributor has no Range Selector support
+[init -> log_terminal] [    0.000000] GICv3: no VLPI support, no direct LPI support
+[init -> log_terminal] [    0.000000] GICv3: CPU0: found redistributor 0 region 0:0x00000000080a0000
+[init -> vmm] Warning: Invalid write access to register GICR_WAKER address=0x0 width=0x4
+[init -> vmm] Warning: Will ignore invalid bus access (IPA=0x80a0014)
+[init -> vmm] Warning: Invalid write access to register GICR_IGROUPR0 address=0x0 width=0x4
+[init -> vmm] Warning: Will ignore invalid bus access (IPA=0x80b0080)
+[init -> log_terminal] [    0.000000] arch_timer: cp15 timer(s) running at 8.33MHz (virt).
+[init -> log_terminal] [    0.000000] clocksource: arch_sys_counter: mask: 0xffffffffffffff max_cycles: 0x1ec0311ec, max_idle_ns: 440795202152 ns
+[init -> log_terminal] [    0.000005] sched_clock: 56 bits at 8MHz, resolution 120ns, wraps every 2199023255541ns
+[init -> log_terminal] [    0.047766] Console: colour dummy device 80x25
+[init -> log_terminal] [    0.075919] Calibrating delay loop (skipped), value calculated using timer frequency.. 16.66 BogoMIPS (lpj=33333)
+[init -> log_terminal] [    0.136326] pid_max: default: 32768 minimum: 301
+[init -> log_terminal] [    0.166768] Security Framework initialized
+[init -> log_terminal] [    0.192834] Dentry cache hash table entries: 8192 (order: 4, 65536 bytes)
+[init -> log_terminal] [    0.233799] Inode-cache hash table entries: 4096 (order: 3, 32768 bytes)
+[init -> log_terminal] [    0.274805] Mount-cache hash table entries: 512 (order: 0, 4096 bytes)
+[init -> log_terminal] [    0.314297] Mountpoint-cache hash table entries: 512 (order: 0, 4096 bytes)
+[init -> log_terminal] [    0.392873] ASID allocator initialised with 32768 entries
+[init -> log_terminal] [    0.437528] rcu: Hierarchical SRCU implementation.
+[init -> log_terminal] [    0.479134] EFI services will not be available.
+[init -> log_terminal] [    0.518921] smp: Bringing up secondary CPUs ...
+[init -> log_terminal] [    0.547249] smp: Brought up 1 node, 1 CPU
+[init -> log_terminal] [    0.572641] SMP: Total of 1 processors activated.
+[init -> log_terminal] [    0.740354] CPU: All CPU(s) started at EL1
+[init -> log_terminal] [    0.766233] alternatives: patching kernel code
+[init -> log_terminal] [    0.794689] devtmpfs: initialized
+[init -> log_terminal] [    0.822927] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 7645041785100000 ns
+[init -> log_terminal] [    0.880455] futex hash table entries: 256 (order: 2, 16384 bytes)
+[init -> log_terminal] [    0.918116] pinctrl core: initialized pinctrl subsystem
+[init -> log_terminal] [    0.952267] DMI not present or invalid.
+[init -> log_terminal] [    0.978740] NET: Registered protocol family 16
+[init -> log_terminal] [    1.007424] audit: initializing netlink subsys (disabled)
+[init -> log_terminal] [    1.042264] cpuidle: using governor menu
+[init -> log_terminal] [    1.067414] audit: type=2000 audit(0.276:1): state=initialized audit_enabled=0 res=1
+[init -> log_terminal] [    1.115591] vdso: 2 pages (1 code @ (____ptrval____), 1 data @ (____ptrval____))
+[init -> log_terminal] [    1.160122] hw-breakpoint: found 1 breakpoint and 1 watchpoint registers.
+[init -> log_terminal] [    1.202128] DMA: preallocated 256 KiB pool for atomic allocations
+[init -> log_terminal] [    1.241657] Serial: AMBA PL011 UART driver
+[init -> log_terminal] [    1.270808] 9000000.pl011: ttyAMA0 at MMIO 0x9000000 (irq = 5, base_baud = 0) is a PL011 rev1
+[init -> log_terminal] [    1.372322] HugeTLB registered 2.00 MiB page size, pre-allocated 0 pages
+[init -> log_terminal] [    1.419613] cryptd: max_cpu_qlen set to 1000
+[init -> log_terminal] [    1.459730] ACPI: Interpreter disabled.
+[init -> log_terminal] [    1.485755] vgaarb: loaded
+[init -> log_terminal] [    1.505008] SCSI subsystem initialized
+[init -> log_terminal] [    1.535519] usbcore: registered new interface driver usbfs
+[init -> log_terminal] [    1.570047] usbcore: registered new interface driver hub
+[init -> log_terminal] [    1.602871] usbcore: registered new device driver usb
+[init -> log_terminal] [    1.634953] pps_core: LinuxPPS API ver. 1 registered
+[init -> log_terminal] [    1.666324] pps_core: Software ver. 5.3.6 - Copyright 2005-2007 Rodolfo Giometti <giometti@linux.it>
+[init -> log_terminal] [    1.720499] PTP clock support registered
+[init -> log_terminal] [    1.745741] EDAC MC: Ver: 3.0.0
+[init -> log_terminal] [    1.779279] Advanced Linux Sound Architecture Driver Initialized.
+[init -> log_terminal] [    1.817450] clocksource: Switched to clocksource arch_sys_counter
+[init -> log_terminal] [    1.856922] VFS: Disk quotas dquot_6.6.0
+[init -> log_terminal] [    1.882219] VFS: Dquot-cache hash table entries: 512 (order 0, 4096 bytes)
+[init -> log_terminal] [    1.924302] pnp: PnP ACPI: disabled
+[init -> log_terminal] [    1.960141] NET: Registered protocol family 2
+[init -> log_terminal] [    1.991429] tcp_listen_portaddr_hash hash table entries: 256 (order: 0, 4096 bytes)
+[init -> log_terminal] [    2.037901] TCP established hash table entries: 512 (order: 0, 4096 bytes)
+[init -> log_terminal] [    2.079422] TCP bind hash table entries: 512 (order: 1, 8192 bytes)
+[init -> log_terminal] [    2.117776] TCP: Hash tables configured (established 512 bind 512)
+[init -> log_terminal] [    2.155393] UDP hash table entries: 256 (order: 1, 8192 bytes)
+[init -> log_terminal] [    2.191031] UDP-Lite hash table entries: 256 (order: 1, 8192 bytes)
+[init -> log_terminal] [    2.229859] NET: Registered protocol family 1
+[init -> log_terminal] [    2.275266] RPC: Registered named UNIX socket transport module.
+[init -> log_terminal] [    2.311386] RPC: Registered udp transport module.
+[init -> log_terminal] [    2.340671] RPC: Registered tcp transport module.
+[init -> log_terminal] [    2.369968] RPC: Registered tcp NFSv4.1 backchannel transport module.
+[init -> log_terminal] [    2.409814] Unpacking initramfs...
+[init -> log_terminal] [    2.474288] Freeing initrd memory: 680K
+[init -> log_terminal] [    2.499232] kvm [1]: HYP mode not available
+[init -> log_terminal] [    2.528272] Initialise system trusted keyrings
+[init -> log_terminal] [    2.557241] workingset: timestamp_bits=44 max_order=13 bucket_order=0
+[init -> log_terminal] [    2.612452] squashfs: version 4.0 (2009/01/31) Phillip Lougher
+[init -> log_terminal] [    2.656512] NFS: Registering the id_resolver key type
+[init -> log_terminal] [    2.688090] Key type id_resolver registered
+[init -> log_terminal] [    2.714508] Key type id_legacy registered
+[init -> log_terminal] [    2.739969] nfs4filelayout_init: NFSv4 File Layout Driver Registering...
+[init -> log_terminal] [    2.780634] 9p: Installing v9fs 9p2000 file system support
+[init -> log_terminal] [    2.817811] Key type asymmetric registered
+[init -> log_terminal] [    2.843780] Asymmetric key parser 'x509' registered
+[init -> log_terminal] [    2.874211] Block layer SCSI generic (bsg) driver version 0.4 loaded (major 244)
+[init -> log_terminal] [    2.919082] io scheduler noop registered
+[init -> log_terminal] [    2.944048] io scheduler deadline registered
+[init -> log_terminal] [    2.971058] io scheduler cfq registered (default)
+[init -> log_terminal] [    3.000399] io scheduler mq-deadline registered
+[init -> log_terminal] [    3.028747] io scheduler kyber registered
+[init -> log_terminal] [    3.067928] EINJ: ACPI disabled.
+[init -> log_terminal] [    3.108173] Serial: 8250/16550 driver, 4 ports, IRQ sharing enabled
+[init -> log_terminal] [    3.150192] SuperH (H)SCI(F) driver initialized
+[init -> log_terminal] [    3.180558] msm_serial: driver initialized
+[init -> log_terminal] [    3.216472] console [hvc0] enabled
+[init -> log_terminal] [    3.238925] bootconsole [pl11] disabled
+[init -> vm] [    3.275680] loop: module loaded
+[init -> vm] [    3.289373] libphy: Fixed MDIO Bus: probed
+[init -> vm] [    3.299038] tun: Universal TUN/TAP device driver, 1.6
+[init -> vmm] Warning: Could not find address=0xfc width=0x4
+[init -> vmm] Warning: Will ignore invalid bus access (IPA=0xa0002fc)
+[init -> vmm] Warning: Could not find address=0xfc width=0x4
+[init -> vmm] Warning: Will ignore invalid bus access (IPA=0xa0002fc)
+[init -> vm] [    3.348553] thunder_xcv, ver 1.0
+[init -> vm] [    3.355684] thunder_bgx, ver 1.0
+[init -> vm] [    3.362299] nicpf, ver 1.0
+[init -> vm] [    3.368436] e1000e: Intel(R) PRO/1000 Network Driver - 3.2.6-k
+[init -> vm] [    3.378372] e1000e: Copyright(c) 1999 - 2015 Intel Corporation.
+[init -> vm] [    3.388188] igb: Intel(R) Gigabit Ethernet Network Driver - version 5.4.0-k
+[init -> vm] [    3.399496] igb: Copyright (c) 2007-2014 Intel Corporation.
+[init -> vm] [    3.408702] igbvf: Intel(R) Gigabit Virtual Function Network Driver - version 2.4.0-k
+[init -> vm] [    3.420658] igbvf: Copyright (c) 2009 - 2012 Intel Corporation.
+[init -> vm] [    3.430710] sky2: driver version 1.30
+[init -> vm] [    3.438510] VFIO - User Level meta-driver version: 0.3
+[init -> vm] [    3.454912] ehci_hcd: USB 2.0 'Enhanced' Host Controller (EHCI) Driver
+[init -> vm] [    3.466177] ehci-pci: EHCI PCI platform driver
+[init -> vm] [    3.474242] ehci-platform: EHCI generic platform driver
+[init -> vm] [    3.483193] ehci-orion: EHCI orion driver
+[init -> vm] [    3.490599] ehci-exynos: EHCI EXYNOS driver
+[init -> vm] [    3.498200] ohci_hcd: USB 1.1 'Open' Host Controller (OHCI) Driver
+[init -> vm] [    3.508251] ohci-pci: OHCI PCI platform driver
+[init -> vm] [    3.516301] ohci-platform: OHCI generic platform driver
+[init -> vm] [    3.525186] ohci-exynos: OHCI EXYNOS driver
+[init -> vm] [    3.533096] usbcore: registered new interface driver usb-storage
+[init -> vm] [    3.546355] i2c /dev entries driver
+[init -> vm] [    3.559737] sdhci: Secure Digital Host Controller Interface driver
+[init -> vm] [    3.572136] sdhci: Copyright(c) Pierre Ossman
+[init -> vm] [    3.580748] Synopsys Designware Multimedia Card Interface Driver
+[init -> vm] [    3.591707] sdhci-pltfm: SDHCI platform and OF driver helper
+[init -> vm] [    3.602875] ledtrig-cpu: registered to indicate activity on CPUs
+[init -> vm] [    3.615198] usbcore: registered new interface driver usbhid
+[init -> vm] [    3.625436] usbhid: USB HID core driver
+[init -> vm] [    3.635895] NET: Registered protocol family 17
+[init -> vm] [    3.645387] 9pnet: Installing 9P2000 support
+[init -> vm] [    3.653349] Key type dns_resolver registered
+[init -> vm] [    3.662263] registered taskstats version 1
+[init -> vm] [    3.669849] Loading compiled-in X.509 certificates
+[init -> vm] [    3.678521] hctosys: unable to open rtc device (rtc0)
+[init -> vm] [    3.687220] ALSA device list:
+[init -> vm] [    3.693766]   No soundcards found.
+[init -> vm] [    3.701177] Freeing unused kernel memory: 1344K
+[init -> vm] [    3.709326] Run /bin/sh as init process
+[init -> vm] /bin/sh: can't access tty; job control turned off
+[init -> vm] / # sleep 1
+[init -> vm] / # 
+[init -> vm] / # sleep 1
+[init -> vm] / # 
+[init -> vm] / # sleep 1
+[init -> vm] / # 
+[init -> vm] / # sleep 1
+[init -> vm] / # 
+[init -> vm] / # sleep 1
+[init -> vmm] Start test 2
+Remove_func::BLOCK::INVALID
+_update_cache::addr: 0xffffffd000635000, size: 0x8
+Remove_func::BLOCK::INVALID
+_update_cache::addr: 0xffffffd000635008, size: 0x8
+Remove_func::BLOCK::INVALID
+_update_cache::addr: 0xffffffd000635010, size: 0x8
+Remove_func::BLOCK::INVALID
+_update_cache::addr: 0xffffffd000635018, size: 0x8
+Remove_func::BLOCK::INVALID
+_update_cache::addr: 0xffffffd000635020, size: 0x8
+Remove_func::BLOCK::INVALID
+_update_cache::addr: 0xffffffd000635028, size: 0x8
+Remove_func::BLOCK::INVALID
+_update_cache::addr: 0xffffffd000635030, size: 0x8
+Remove_func::BLOCK::INVALID
+_update_cache::addr: 0xffffffd000635038, size: 0x8
+Remove_func::BLOCK::INVALID
+_update_cache::addr: 0xffffffd000635040, size: 0x8
+Remove_func::BLOCK::INVALID
+_update_cache::addr: 0xffffffd000635048, size: 0x8
+Remove_func::BLOCK::INVALID
+_update_cache::addr: 0xffffffd000635050, size: 0x8
+Remove_func::BLOCK::INVALID
+_update_cache::addr: 0xffffffd000635058, size: 0x8
+Remove_func::BLOCK::INVALID
+_update_cache::addr: 0xffffffd000635060, size: 0x8
+Remove_func::BLOCK::INVALID
+_update_cache::addr: 0xffffffd000635068, size: 0x8
+Remove_func::BLOCK::INVALID
+_update_cache::addr: 0xffffffd000635070, size: 0x8
+Remove_func::BLOCK::INVALID
+_update_cache::addr: 0xffffffd000635078, size: 0x8
+Remove_func::BLOCK::INVALID
+_update_cache::addr: 0xffffffd000635080, size: 0x8
+Remove_func::BLOCK::INVALID
+_update_cache::addr: 0xffffffd000635088, size: 0x8
+Remove_func::BLOCK::INVALID
+_update_cache::addr: 0xffffffd000635090, size: 0x8
+Remove_func::BLOCK::INVALID
+_update_cache::addr: 0xffffffd000635098, size: 0x8
+Remove_func::BLOCK::INVALID
+_update_cache::addr: 0xffffffd0006350a0, size: 0x8
+Remove_func::BLOCK::INVALID
+_update_cache::addr: 0xffffffd0006350a8, size: 0x8
+Remove_func::BLOCK::INVALID
+_update_cache::addr: 0xffffffd0006350b0, size: 0x8
+Remove_func::BLOCK::INVALID
+_update_cache::addr: 0xffffffd0006350b8, size: 0x8
+Remove_func::BLOCK::INVALID
+_update_cache::addr: 0xffffffd0006350c0, size: 0x8
+Remove_func::BLOCK::INVALID
+_update_cache::addr: 0xffffffd0006350c8, size: 0x8
+Remove_func::BLOCK::INVALID
+_update_cache::addr: 0xffffffd0006350d0, size: 0x8
+Remove_func::BLOCK::INVALID
+_update_cache::addr: 0xffffffd0006350d8, size: 0x8
+Remove_func::BLOCK::INVALID
+_update_cache::addr: 0xffffffd0006350e0, size: 0x8
+Remove_func::BLOCK::INVALID
+_update_cache::addr: 0xffffffd0006350e8, size: 0x8
+Remove_func::BLOCK::INVALID
+_update_cache::addr: 0xffffffd0006350f0, size: 0x8
+Remove_func::BLOCK::INVALID
+_update_cache::addr: 0xffffffd0006350f8, size: 0x8
+remove_translation
+_update_cache::addr: 0xffffffd000635000, size: 0x8
+Remove_func::TABLE
+Remove_func::BLOCK::INVALID
+_update_cache::addr: 0xffffffd000634008, size: 0x8
+remove_translation
+_update_cache::addr: 0xffffffd000634000, size: 0x8
+Vm::invalidate_tlb_vm()
+[init -> vmm] entire detach
+[init -> vmm] attach page 0x41200000
+Vm_session_component::insert_translation::virt_addr vttbr_el2: 0xffffffd000634000
+Insert_func:CREATE_NEW_TABLE
+_update_cache::addr: 0xffffffd000634008, size: 0x8
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd000635048, size: 0x8
+insert_translation
+_update_cache::addr: 0xffffffd000635000, size: 0x8
+Insert_func::TABLE_EXISTS
+insert_translation
+_update_cache::addr: 0xffffffd000634000, size: 0x8
+Vm::invalidate_tlb_vm()
+[init -> vmm] attach page 0x43e00000
+Vm_session_component::insert_translation::virt_addr vttbr_el2: 0xffffffd000634000
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd0006350f8, size: 0x8
+insert_translation
+_update_cache::addr: 0xffffffd000635000, size: 0x8
+Insert_func::TABLE_EXISTS
+insert_translation
+_update_cache::addr: 0xffffffd000634000, size: 0x8
+Vm::invalidate_tlb_vm()
+[init -> vmm] attach page 0x40000000
+Vm_session_component::insert_translation::virt_addr vttbr_el2: 0xffffffd000634000
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd000635000, size: 0x8
+insert_translation
+_update_cache::addr: 0xffffffd000635000, size: 0x8
+Insert_func::TABLE_EXISTS
+insert_translation
+_update_cache::addr: 0xffffffd000634000, size: 0x8
+Vm::invalidate_tlb_vm()
+[init -> vmm] attach page 0x41000000
+Vm_session_component::insert_translation::virt_addr vttbr_el2: 0xffffffd000634000
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd000635040, size: 0x8
+insert_translation
+_update_cache::addr: 0xffffffd000635000, size: 0x8
+Insert_func::TABLE_EXISTS
+insert_translation
+_update_cache::addr: 0xffffffd000634000, size: 0x8
+Vm::invalidate_tlb_vm()
+[init -> vmm] attach page 0x40e00000
+Vm_session_component::insert_translation::virt_addr vttbr_el2: 0xffffffd000634000
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd000635038, size: 0x8
+insert_translation
+_update_cache::addr: 0xffffffd000635000, size: 0x8
+Insert_func::TABLE_EXISTS
+insert_translation
+_update_cache::addr: 0xffffffd000634000, size: 0x8
+Vm::invalidate_tlb_vm()
+[init -> vmm] attach page 0x42800000
+Vm_session_component::insert_translation::virt_addr vttbr_el2: 0xffffffd000634000
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd0006350a0, size: 0x8
+insert_translation
+_update_cache::addr: 0xffffffd000635000, size: 0x8
+Insert_func::TABLE_EXISTS
+insert_translation
+_update_cache::addr: 0xffffffd000634000, size: 0x8
+Vm::invalidate_tlb_vm()
+[init -> vmm] attach page 0x40a00000
+Vm_session_component::insert_translation::virt_addr vttbr_el2: 0xffffffd000634000
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd000635028, size: 0x8
+insert_translation
+_update_cache::addr: 0xffffffd000635000, size: 0x8
+Insert_func::TABLE_EXISTS
+insert_translation
+_update_cache::addr: 0xffffffd000634000, size: 0x8
+Vm::invalidate_tlb_vm()
+[init -> vmm] attach page 0x40800000
+Vm_session_component::insert_translation::virt_addr vttbr_el2: 0xffffffd000634000
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd000635020, size: 0x8
+insert_translation
+_update_cache::addr: 0xffffffd000635000, size: 0x8
+Insert_func::TABLE_EXISTS
+insert_translation
+_update_cache::addr: 0xffffffd000634000, size: 0x8
+Vm::invalidate_tlb_vm()
+[init -> vmm] attach page 0x42400000
+Vm_session_component::insert_translation::virt_addr vttbr_el2: 0xffffffd000634000
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd000635090, size: 0x8
+insert_translation
+_update_cache::addr: 0xffffffd000635000, size: 0x8
+Insert_func::TABLE_EXISTS
+insert_translation
+_update_cache::addr: 0xffffffd000634000, size: 0x8
+Vm::invalidate_tlb_vm()
+[init -> vmm] attach page 0x41e00000
+Vm_session_component::insert_translation::virt_addr vttbr_el2: 0xffffffd000634000
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd000635078, size: 0x8
+insert_translation
+_update_cache::addr: 0xffffffd000635000, size: 0x8
+Insert_func::TABLE_EXISTS
+insert_translation
+_update_cache::addr: 0xffffffd000634000, size: 0x8
+Vm::invalidate_tlb_vm()
+Vm_session_component::insert_translation::virt_addr vttbr_el2: 0xffffffd000634000
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd000635008, size: 0x8
+insert_translation
+_update_cache::addr: 0xffffffd000635000, size: 0x8
+Insert_func::TABLE_EXISTS
+insert_translation
+_update_cache::addr: 0xffffffd000634000, size: 0x8
+Vm::invalidate_tlb_vm()
+Vm_session_component::insert_translation::virt_addr vttbr_el2: 0xffffffd000634000
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd000635010, size: 0x8
+insert_translation
+_update_cache::addr: 0xffffffd000635000, size: 0x8
+Insert_func::TABLE_EXISTS
+insert_translation
+_update_cache::addr: 0xffffffd000634000, size: 0x8
+Vm::invalidate_tlb_vm()
+Vm_session_component::insert_translation::virt_addr vttbr_el2: 0xffffffd000634000
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd000635018, size: 0x8
+insert_translation
+_update_cache::addr: 0xffffffd000635000, size: 0x8
+Insert_func::TABLE_EXISTS
+insert_translation
+_update_cache::addr: 0xffffffd000634000, size: 0x8
+Vm::invalidate_tlb_vm()
+Vm_session_component::insert_translation::virt_addr vttbr_el2: 0xffffffd000634000
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd000635030, size: 0x8
+insert_translation
+_update_cache::addr: 0xffffffd000635000, size: 0x8
+Insert_func::TABLE_EXISTS
+insert_translation
+_update_cache::addr: 0xffffffd000634000, size: 0x8
+Vm::invalidate_tlb_vm()
+Vm_session_component::insert_translation::virt_addr vttbr_el2: 0xffffffd000634000
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd000635050, size: 0x8
+insert_translation
+_update_cache::addr: 0xffffffd000635000, size: 0x8
+Insert_func::TABLE_EXISTS
+insert_translation
+_update_cache::addr: 0xffffffd000634000, size: 0x8
+Vm::invalidate_tlb_vm()
+Vm_session_component::insert_translation::virt_addr vttbr_el2: 0xffffffd000634000
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd000635058, size: 0x8
+insert_translation
+_update_cache::addr: 0xffffffd000635000, size: 0x8
+Insert_func::TABLE_EXISTS
+insert_translation
+_update_cache::addr: 0xffffffd000634000, size: 0x8
+Vm::invalidate_tlb_vm()
+Vm_session_component::insert_translation::virt_addr vttbr_el2: 0xffffffd000634000
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd000635060, size: 0x8
+insert_translation
+_update_cache::addr: 0xffffffd000635000, size: 0x8
+Insert_func::TABLE_EXISTS
+insert_translation
+_update_cache::addr: 0xffffffd000634000, size: 0x8
+Vm::invalidate_tlb_vm()
+Vm_session_component::insert_translation::virt_addr vttbr_el2: 0xffffffd000634000
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd000635068, size: 0x8
+insert_translation
+_update_cache::addr: 0xffffffd000635000, size: 0x8
+Insert_func::TABLE_EXISTS
+insert_translation
+_update_cache::addr: 0xffffffd000634000, size: 0x8
+Vm::invalidate_tlb_vm()
+Vm_session_component::insert_translation::virt_addr vttbr_el2: 0xffffffd000634000
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd000635070, size: 0x8
+insert_translation
+_update_cache::addr: 0xffffffd000635000, size: 0x8
+Insert_func::TABLE_EXISTS
+insert_translation
+_update_cache::addr: 0xffffffd000634000, size: 0x8
+Vm::invalidate_tlb_vm()
+Vm_session_component::insert_translation::virt_addr vttbr_el2: 0xffffffd000634000
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd000635080, size: 0x8
+insert_translation
+_update_cache::addr: 0xffffffd000635000, size: 0x8
+Insert_func::TABLE_EXISTS
+insert_translation
+_update_cache::addr: 0xffffffd000634000, size: 0x8
+Vm::invalidate_tlb_vm()
+Vm_session_component::insert_translation::virt_addr vttbr_el2: 0xffffffd000634000
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd000635088, size: 0x8
+insert_translation
+_update_cache::addr: 0xffffffd000635000, size: 0x8
+Insert_func::TABLE_EXISTS
+insert_translation
+_update_cache::addr: 0xffffffd000634000, size: 0x8
+Vm::invalidate_tlb_vm()
+Vm_session_component::insert_translation::virt_addr vttbr_el2: 0xffffffd000634000
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd000635098, size: 0x8
+insert_translation
+_update_cache::addr: 0xffffffd000635000, size: 0x8
+Insert_func::TABLE_EXISTS
+insert_translation
+_update_cache::addr: 0xffffffd000634000, size: 0x8
+Vm::invalidate_tlb_vm()
+Vm_session_component::insert_translation::virt_addr vttbr_el2: 0xffffffd000634000
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd0006350a8, size: 0x8
+insert_translation
+_update_cache::addr: 0xffffffd000635000, size: 0x8
+Insert_func::TABLE_EXISTS
+insert_translation
+_update_cache::addr: 0xffffffd000634000, size: 0x8
+Vm::invalidate_tlb_vm()
+Vm_session_component::insert_translation::virt_addr vttbr_el2: 0xffffffd000634000
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd0006350b0, size: 0x8
+insert_translation
+_update_cache::addr: 0xffffffd000635000, size: 0x8
+Insert_func::TABLE_EXISTS
+insert_translation
+_update_cache::addr: 0xffffffd000634000, size: 0x8
+Vm::invalidate_tlb_vm()
+Vm_session_component::insert_translation::virt_addr vttbr_el2: 0xffffffd000634000
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd0006350b8, size: 0x8
+insert_translation
+_update_cache::addr: 0xffffffd000635000, size: 0x8
+Insert_func::TABLE_EXISTS
+insert_translation
+_update_cache::addr: 0xffffffd000634000, size: 0x8
+Vm::invalidate_tlb_vm()
+Vm_session_component::insert_translation::virt_addr vttbr_el2: 0xffffffd000634000
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd0006350c0, size: 0x8
+insert_translation
+_update_cache::addr: 0xffffffd000635000, size: 0x8
+Insert_func::TABLE_EXISTS
+insert_translation
+_update_cache::addr: 0xffffffd000634000, size: 0x8
+Vm::invalidate_tlb_vm()
+Vm_session_component::insert_translation::virt_addr vttbr_el2: 0xffffffd000634000
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd0006350c8, size: 0x8
+insert_translation
+_update_cache::addr: 0xffffffd000635000, size: 0x8
+Insert_func::TABLE_EXISTS
+insert_translation
+_update_cache::addr: 0xffffffd000634000, size: 0x8
+Vm::invalidate_tlb_vm()
+Vm_session_component::insert_translation::virt_addr vttbr_el2: 0xffffffd000634000
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd0006350d0, size: 0x8
+insert_translation
+_update_cache::addr: 0xffffffd000635000, size: 0x8
+Insert_func::TABLE_EXISTS
+insert_translation
+_update_cache::addr: 0xffffffd000634000, size: 0x8
+Vm::invalidate_tlb_vm()
+Vm_session_component::insert_translation::virt_addr vttbr_el2: 0xffffffd000634000
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd0006350d8, size: 0x8
+insert_translation
+_update_cache::addr: 0xffffffd000635000, size: 0x8
+Insert_func::TABLE_EXISTS
+insert_translation
+_update_cache::addr: 0xffffffd000634000, size: 0x8
+Vm::invalidate_tlb_vm()
+Vm_session_component::insert_translation::virt_addr vttbr_el2: 0xffffffd000634000
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd0006350e0, size: 0x8
+insert_translation
+_update_cache::addr: 0xffffffd000635000, size: 0x8
+Insert_func::TABLE_EXISTS
+insert_translation
+_update_cache::addr: 0xffffffd000634000, size: 0x8
+Vm::invalidate_tlb_vm()
+Vm_session_component::insert_translation::virt_addr vttbr_el2: 0xffffffd000634000
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd0006350e8, size: 0x8
+insert_translation
+_update_cache::addr: 0xffffffd000635000, size: 0x8
+Insert_func::TABLE_EXISTS
+insert_translation
+_update_cache::addr: 0xffffffd000634000, size: 0x8
+Vm::invalidate_tlb_vm()
+Vm_session_component::insert_translation::virt_addr vttbr_el2: 0xffffffd000634000
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd0006350f0, size: 0x8
+insert_translation
+_update_cache::addr: 0xffffffd000635000, size: 0x8
+Insert_func::TABLE_EXISTS
+insert_translation
+_update_cache::addr: 0xffffffd000634000, size: 0x8
+Vm::invalidate_tlb_vm()
+[init -> vmm] all pages attached
+[init -> vm] / # 
+[init -> vm] / # sleep 1
+[init -> vm] sleep 1
+[init -> vm] sleep 1
+[init -> vm] sleep 1
+[init -> vm] sleep 1
+[init -> vm] / # 
+[init -> vm] / # sleep 1
+[init -> vm] / # 
+[init -> vm] / # sleep 1
+[init -> vm] / # 
+[init -> vm] / # sleep 1
+À
+U-Boot SPL 2019.04-04771-g4d377539a1-dirty (Mar 05 2020 - 14:57:16 +0100)
+PMIC:  PFUZE100 ID=0x10
+DDRINFO: start DRAM init
+DDRINFO:ddrphy calibration done
+DDRINFO: ddrmix config done
+Normal Boot
+Trying to boot from MMC2
+
+
+U-Boot 2019.04-04771-g4d377539a1-dirty (Mar 05 2020 - 14:13:51 +0100)
+
+CPU:   Freescale i.MX8MQ rev2.1 1500 MHz (running at 1000 MHz)
+CPU:   Commercial temperature grade (0C to 95C) at 38C
+Reset cause: POR
+Model: Freescale i.MX8MQ EVK
+DRAM:  3 GiB
+TCPC:  Vendor ID [0x1fc9], Product ID [0x5110], Addr [I2C0 0x50]
+MMC:   FSL_SDHC: 0, FSL_SDHC: 1
+Loading Environment from MMC... Run CMD11 1.8V switch
+OK
+No panel detected: default to HDMI
+Display: HDMI (1280x720)
+cdn_api_checkalive: keep-alive counter did not increment for 10us...
+HDMI enable failed!
+In:    serial
+Out:   serial
+Err:   serial
+
+ BuildInfo:
+  - ATF 413e93e
+  - U-Boot 2019.04-04771-g4d377539a1-dirty
+
+Run CMD11 1.8V switch
+switch to partitions #0, OK
+mmc1 is current device
+flash target is MMC:1
+Run CMD11 1.8V switch
+Net:   eth0: ethernet@30be0000
+Fastboot: Normal
+Normal Boot
+Hit any key to stop autoboot:  2  0
+u-boot=>      ./À
+U-Boot SPL 2019.04-04771-g4d377539a1-dirty (Mar 05 2020 - 14:57:16 +0100)
+PMIC:  PFUZE100 ID=0x10
+DDRINFO: start DRAM init
+DDRINFO:ddrphy calibration done
+DDRINFO: ddrmix config done
+Normal Boot
+Trying to boot from MMC2
+
+
+U-Boot 2019.04-04771-g4d377539a1-dirty (Mar 05 2020 - 14:13:51 +0100)
+
+CPU:   Freescale i.MX8MQ rev2.1 1500 MHz (running at 1000 MHz)
+CPU:   Commercial temperature grade (0C to 95C) at 38C
+Reset cause: POR
+Model: Freescale i.MX8MQ EVK
+DRAM:  3 GiB
+TCPC:  Vendor ID [0x1fc9], Product ID [0x5110], Addr [I2C0 0x50]
+MMC:   FSL_SDHC: 0, FSL_SDHC: 1
+Loading Environment from MMC... Run CMD11 1.8V switch
+OK
+No panel detected: default to HDMI
+Display: HDMI (1280x720)
+cdn_api_checkalive: keep-alive counter did not increment for 10us...
+HDMI enable failed!
+In:    serial
+Out:   serial
+Err:   serial
+
+ BuildInfo:
+  - ATF 413e93e
+  - U-Boot 2019.04-04771-g4d377539a1-dirty
+
+Run CMD11 1.8V switch
+switch to partitions #0, OK
+mmc1 is current device
+flash target is MMC:1
+Run CMD11 1.8V switch
+Net:   eth0: ethernet@30be0000
+Fastboot: Normal
+Normal Boot
+Hit any key to stop autoboot:  2  1  0 
+ethernet@30be0000 Waiting for PHY auto negotiation to complete. done
+BOOTP broadcast 1
+BOOTP broadcast 2
+BOOTP broadcast 3
+BOOTP broadcast 4
+BOOTP broadcast 5
+DHCP client bound to address 192.168.1.11 (7763 ms)
+Using ethernet@30be0000 device
+TFTP from server 192.168.1.1; our IP address is 192.168.1.11
+Filename 'genode'.
+Load address: 0x60000000
+Loading: *#################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 ##############################################################
+	 4.4 MiB/s
+done
+Bytes transferred = 9968599 (981bd7 hex)
+## Booting kernel from Legacy Image at 60000000 ...
+   Image Name:   
+   Image Type:   AArch64 Linux Kernel Image (gzip compressed)
+   Data Size:    9968535 Bytes = 9.5 MiB
+   Load Address: 40010000
+   Entry Point:  40010000
+   Verifying Checksum ... OK
+   Uncompressing Kernel Image ... OK
+
+Starting kernel ...
+
+
+kernel initialized
+ROM modules:
+ ROM: [0000000040240000,0000000040240710) config
+ ROM: [000000004000e000,000000004000f000) core_log
+ ROM: [0000000040241000,0000000040241665) dtb
+ ROM: [00000000401fe000,000000004023f550) init
+ ROM: [000000004145d000,0000000041507539) initrd
+ ROM: [0000000040138000,00000000401ede80) ld.lib.so
+ ROM: [0000000040272000,0000000041439200) linux
+ ROM: [000000004157e000,000000004158c970) log_terminal
+ ROM: [0000000041508000,000000004157d688) nic_router
+ ROM: [000000004000c000,000000004000d000) platform_info
+ ROM: [00000000401ee000,00000000401fdb48) terminal_crosslink
+ ROM: [000000004144b000,000000004145c770) test-terminal_expect_send
+ ROM: [000000004143a000,000000004144acd0) timer
+ ROM: [0000000040242000,0000000040272000) vmm
+
+Genode sculpt-20.02-74-ga6a5d2bc1 <local changes>
+3047 MiB RAM and 64533 caps assigned to init
+[init] parent provides
+[init]   service "ROM"
+[init]   service "IRQ"
+[init]   service "IO_MEM"
+[init]   service "PD"
+[init]   service "RM"
+[init]   service "CPU"
+[init]   service "LOG"
+[init]   service "VM"
+[init] child "timer"
+[init]   RAM quota:  776K
+[init]   cap quota:  68
+[init]   ELF binary: timer
+[init]   priority:   0
+[init]   provides service Timer
+[init] child "nic_drv"
+[init]   RAM quota:  7944K
+[init]   cap quota:  68
+[init]   ELF binary: nic_router
+[init]   priority:   0
+[init]   provides service Nic
+[init] child "log_terminal"
+[init]   RAM quota:  1800K
+[init]   cap quota:  68
+[init]   ELF binary: log_terminal
+[init]   priority:   0
+[init]   provides service Terminal
+[init] child "terminal_crosslink"
+[init]   RAM quota:  776K
+[init]   cap quota:  68
+[init]   ELF binary: terminal_crosslink
+[init]   priority:   0
+[init]   provides service Terminal
+[init] child "vmm"
+[init]   RAM quota:  261896K
+[init]   cap quota:  168
+[init]   ELF binary: vmm
+[init]   priority:   1
+[init] child "vm"
+[init]   RAM quota:  776K
+[init]   cap quota:  68
+[init]   ELF binary: test-terminal_expect_send
+[init]   priority:   0
+[init] child "log_terminal" announces service "Terminal"
+[init] child "terminal_crosslink" announces service "Terminal"
+[init] child "timer" announces service "Timer"
+[init] child "nic_drv" announces service "Nic"
+Vm_session_component::insert_translation::virt_addr vttbr_el2: 0xffffffd000634000
+Insert_func:CREATE_NEW_TABLE
+_update_cache::addr: 0xffffffd000634008, size: 0x8
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd000635000, size: 0x8
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd000635008, size: 0x8
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd000635010, size: 0x8
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd000635018, size: 0x8
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd000635020, size: 0x8
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd000635028, size: 0x8
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd000635030, size: 0x8
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd000635038, size: 0x8
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd000635040, size: 0x8
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd000635048, size: 0x8
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd000635050, size: 0x8
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd000635058, size: 0x8
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd000635060, size: 0x8
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd000635068, size: 0x8
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd000635070, size: 0x8
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd000635078, size: 0x8
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd000635080, size: 0x8
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd000635088, size: 0x8
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd000635090, size: 0x8
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd000635098, size: 0x8
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd0006350a0, size: 0x8
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd0006350a8, size: 0x8
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd0006350b0, size: 0x8
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd0006350b8, size: 0x8
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd0006350c0, size: 0x8
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd0006350c8, size: 0x8
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd0006350d0, size: 0x8
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd0006350d8, size: 0x8
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd0006350e0, size: 0x8
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd0006350e8, size: 0x8
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd0006350f0, size: 0x8
+Insert_func::CREATE_BLOCK
+_update_cache::addr: 0xffffffd0006350f8, size: 0x8
+insert_translation
+_update_cache::addr: 0xffffffd000635000, size: 0x8
+Insert_func::TABLE_EXISTS
+insert_translation
+_update_cache::addr: 0xffffffd000634000, size: 0x8
+Vm::invalidate_tlb_vm()
+[init -> vmm] Start virtual machine ...
+[init -> log_terminal] [    0.000000] Booting Linux on physical CPU 0x0000000000 [0x410fd034]
+[init -> log_terminal] [    0.000000] Linux version 4.19.53 (cbass@kc87) (gcc version 8.3.0 (GCC)) #1 SMP PREEMPT Wed Jun 19 13:23:18 CEST 2019
+[init -> log_terminal] [    0.000000] Machine model: linux,dummy-virt
+[init -> log_terminal] [    0.000000] earlycon: pl11 at MMIO 0x0000000009000000 (options '')
+[init -> log_terminal] [    0.000000] bootconsole [pl11] enabled
+[init -> log_terminal] [    0.000000] efi: Getting EFI parameters from FDT:
+[init -> log_terminal] [    0.000000] efi: UEFI not found.
+[init -> log_terminal] [    0.000000] cma: Failed to reserve 32 MiB
+[init -> log_terminal] [    0.000000] NUMA: No NUMA configuration found
+[init -> log_terminal] [    0.000000] NUMA: Faking a node at [mem 0x0000000000000000-0x0000000043ffffff]
+[init -> log_terminal] [    0.000000] NUMA: NODE_DATA [mem 0x43ff0b00-0x43ff22bf]
+[init -> log_terminal] [    0.000000] Zone ranges:
+[init -> log_terminal] [    0.000000]   DMA32    [mem 0x0000000040000000-0x0000000043ffffff]
+[init -> log_terminal] [    0.000000]   Normal   empty
+[init -> log_terminal] [    0.000000] Movable zone start for each node
+[init -> log_terminal] [    0.000000] Early memory node ranges
+[init -> log_terminal] [    0.000000]   node   0: [mem 0x0000000040000000-0x0000000043ffffff]
+[init -> log_terminal] [    0.000000] Initmem setup node 0 [mem 0x0000000040000000-0x0000000043ffffff]
+[init -> log_terminal] [    0.000000] random: get_random_bytes called from start_kernel+0x94/0x400 with crng_init=0
+[init -> log_terminal] [    0.000000] percpu: Embedded 23 pages/cpu s56408 r8192 d29608 u94208
+[init -> log_terminal] [    0.000000] Detected VIPT I-cache on CPU0
+[init -> log_terminal] [    0.000000] CPU features: enabling workaround for ARM erratum 843419
+[init -> log_terminal] [    0.000000] CPU features: enabling workaround for ARM erratum 845719
+[init -> log_terminal] [    0.000000] CPU features: detected: Kernel page table isolation (KPTI)
+[init -> log_terminal] [    0.000000] Built 1 zonelists, mobility grouping on.  Total pages: 16128
+[init -> log_terminal] [    0.000000] Policy zone: DMA32
+[init -> log_terminal] [    0.000000] Kernel command line: rdinit=/bin/sh console=hvc0 earlycon=pl011,0x9000000
+[init -> log_terminal] [    0.000000] Memory: 29680K/65536K available (10556K kernel code, 1372K rwdata, 4900K rodata, 1344K init, 380K bss, 35856K reserved, 0K cma-reserved)
+[init -> log_terminal] [    0.000000] SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=1, Nodes=1
+[init -> log_terminal] [    0.000000] rcu: Preemptible hierarchical RCU implementation.
+[init -> log_terminal] [    0.000000] rcu: 	RCU restricting CPUs from NR_CPUS=64 to nr_cpu_ids=1.
+[init -> log_terminal] [    0.000000] 	Tasks RCU enabled.
+[init -> log_terminal] [    0.000000] rcu: Adjusting geometry for rcu_fanout_leaf=16, nr_cpu_ids=1
+[init -> log_terminal] [    0.000000] NR_IRQS: 64, nr_irqs: 64, preallocated irqs: 0
+[init -> log_terminal] [    0.000000] GICv3: Distributor has no Range Selector support
+[init -> log_terminal] [    0.000000] GICv3: no VLPI support, no direct LPI support
+[init -> log_terminal] [    0.000000] GICv3: CPU0: found redistributor 0 region 0:0x00000000080a0000
+[init -> vmm] Warning: Invalid write access to register GICR_WAKER address=0x0 width=0x4
+[init -> vmm] Warning: Will ignore invalid bus access (IPA=0x80a0014)
+[init -> vmm] Warning: Invalid write access to register GICR_IGROUPR0 address=0x0 width=0x4
+[init -> vmm] Warning: Will ignore invalid bus access (IPA=0x80b0080)
+[init -> log_terminal] [    0.000000] arch_timer: cp15 timer(s) running at 8.33MHz (virt).
+[init -> log_terminal] [    0.000000] clocksource: arch_sys_counter: mask: 0xffffffffffffff max_cycles: 0x1ec0311ec, max_idle_ns: 440795202152 ns
+[init -> log_terminal] [    0.000005] sched_clock: 56 bits at 8MHz, resolution 120ns, wraps every 2199023255541ns
+[init -> log_terminal] [    0.047769] Console: colour dummy device 80x25
+[init -> log_terminal] [    0.075901] Calibrating delay loop (skipped), value calculated using timer frequency.. 16.66 BogoMIPS (lpj=33333)
+[init -> log_terminal] [    0.136335] pid_max: default: 32768 minimum: 301
+[init -> log_terminal] [    0.166776] Security Framework initialized
+[init -> log_terminal] [    0.192836] Dentry cache hash table entries: 8192 (order: 4, 65536 bytes)
+[init -> log_terminal] [    0.233811] Inode-cache hash table entries: 4096 (order: 3, 32768 bytes)
+[init -> log_terminal] [    0.274822] Mount-cache hash table entries: 512 (order: 0, 4096 bytes)
+[init -> log_terminal] [    0.314322] Mountpoint-cache hash table entries: 512 (order: 0, 4096 bytes)
+[init -> log_terminal] [    0.392913] ASID allocator initialised with 32768 entries
+[init -> log_terminal] [    0.437567] rcu: Hierarchical SRCU implementation.
+[init -> log_terminal] [    0.479177] EFI services will not be available.
+[init -> log_terminal] [    0.518955] smp: Bringing up secondary CPUs ...
+[init -> log_terminal] [    0.547286] smp: Brought up 1 node, 1 CPU
+[init -> log_terminal] [    0.572684] SMP: Total of 1 processors activated.
+[init -> log_terminal] [    0.740383] CPU: All CPU(s) started at EL1
+[init -> log_terminal] [    0.766269] alternatives: patching kernel code
+[init -> log_terminal] [    0.794749] devtmpfs: initialized
+[init -> log_terminal] [    0.823006] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 7645041785100000 ns
+[init -> log_terminal] [    0.880547] futex hash table entries: 256 (order: 2, 16384 bytes)
+[init -> log_terminal] [    0.918209] pinctrl core: initialized pinctrl subsystem
+[init -> log_terminal] [    0.952342] DMI not present or invalid.
+[init -> log_terminal] [    0.978810] NET: Registered protocol family 16
+[init -> log_terminal] [    1.007487] audit: initializing netlink subsys (disabled)
+[init -> log_terminal] [    1.042314] cpuidle: using governor menu
+[init -> log_terminal] [    1.067457] audit: type=2000 audit(0.276:1): state=initialized audit_enabled=0 res=1
+[init -> log_terminal] [    1.115630] vdso: 2 pages (1 code @ (____ptrval____), 1 data @ (____ptrval____))
+[init -> log_terminal] [    1.160166] hw-breakpoint: found 1 breakpoint and 1 watchpoint registers.
+[init -> log_terminal] [    1.202176] DMA: preallocated 256 KiB pool for atomic allocations
+[init -> log_terminal] [    1.241714] Serial: AMBA PL011 UART driver
+[init -> log_terminal] [    1.270874] 9000000.pl011: ttyAMA0 at MMIO 0x9000000 (irq = 5, base_baud = 0) is a PL011 rev1
+[init -> log_terminal] [    1.372505] HugeTLB registered 2.00 MiB page size, pre-allocated 0 pages
+[init -> log_terminal] [    1.419843] cryptd: max_cpu_qlen set to 1000
+[init -> log_terminal] [    1.459948] ACPI: Interpreter disabled.
+[init -> log_terminal] [    1.485994] vgaarb: loaded
+[init -> log_terminal] [    1.505252] SCSI subsystem initialized
+[init -> log_terminal] [    1.535761] usbcore: registered new interface driver usbfs
+[init -> log_terminal] [    1.570279] usbcore: registered new interface driver hub
+[init -> log_terminal] [    1.603102] usbcore: registered new device driver usb
+[init -> log_terminal] [    1.635183] pps_core: LinuxPPS API ver. 1 registered
+[init -> log_terminal] [    1.666549] pps_core: Software ver. 5.3.6 - Copyright 2005-2007 Rodolfo Giometti <giometti@linux.it>
+[init -> log_terminal] [    1.720721] PTP clock support registered
+[init -> log_terminal] [    1.745956] EDAC MC: Ver: 3.0.0
+[init -> log_terminal] [    1.779480] Advanced Linux Sound Architecture Driver Initialized.
+[init -> log_terminal] [    1.817654] clocksource: Switched to clocksource arch_sys_counter
+[init -> log_terminal] [    1.857127] VFS: Disk quotas dquot_6.6.0
+[init -> log_terminal] [    1.882412] VFS: Dquot-cache hash table entries: 512 (order 0, 4096 bytes)
+[init -> log_terminal] [    1.924491] pnp: PnP ACPI: disabled
+[init -> log_terminal] [    1.962610] NET: Registered protocol family 2
+[init -> log_terminal] [    1.991785] tcp_listen_portaddr_hash hash table entries: 256 (order: 0, 4096 bytes)
+[init -> log_terminal] [    2.038094] TCP established hash table entries: 512 (order: 0, 4096 bytes)
+[init -> log_terminal] [    2.079545] TCP bind hash table entries: 512 (order: 1, 8192 bytes)
+[init -> log_terminal] [    2.117595] TCP: Hash tables configured (established 512 bind 512)
+[init -> log_terminal] [    2.155194] UDP hash table entries: 256 (order: 1, 8192 bytes)
+[init -> log_terminal] [    2.190826] UDP-Lite hash table entries: 256 (order: 1, 8192 bytes)
+[init -> log_terminal] [    2.229365] NET: Registered protocol family 1
+[init -> log_terminal] [    2.274759] RPC: Registered named UNIX socket transport module.
+[init -> log_terminal] [    2.310871] RPC: Registered udp transport module.
+[init -> log_terminal] [    2.340170] RPC: Registered tcp transport module.
+[init -> log_terminal] [    2.369459] RPC: Registered tcp NFSv4.1 backchannel transport module.
+[init -> log_terminal] [    2.409018] Unpacking initramfs...
+[init -> log_terminal] [    2.473047] Freeing initrd memory: 680K
+[init -> log_terminal] [    2.498323] kvm [1]: HYP mode not available
+[init -> log_terminal] [    2.527720] Initialise system trusted keyrings
+[init -> log_terminal] [    2.556688] workingset: timestamp_bits=44 max_order=13 bucket_order=0
+[init -> log_terminal] [    2.612560] squashfs: version 4.0 (2009/01/31) Phillip Lougher
+[init -> log_terminal] [    2.656143] NFS: Registering the id_resolver key type
+[init -> log_terminal] [    2.687654] Key type id_resolver registered
+[init -> log_terminal] [    2.714088] Key type id_legacy registered
+[init -> log_terminal] [    2.739516] nfs4filelayout_init: NFSv4 File Layout Driver Registering...
+[init -> log_terminal] [    2.780184] 9p: Installing v9fs 9p2000 file system support
+[init -> log_terminal] [    2.817070] Key type asymmetric registered
+[init -> log_terminal] [    2.843019] Asymmetric key parser 'x509' registered
+[init -> log_terminal] [    2.873357] Block layer SCSI generic (bsg) driver version 0.4 loaded (major 244)
+[init -> log_terminal] [    2.918295] io scheduler noop registered
+[init -> log_terminal] [    2.943241] io scheduler deadline registered
+[init -> log_terminal] [    2.970277] io scheduler cfq registered (default)
+[init -> log_terminal] [    2.999603] io scheduler mq-deadline registered
+[init -> log_terminal] [    3.027932] io scheduler kyber registered
+[init -> log_terminal] [    3.067331] EINJ: ACPI disabled.
+[init -> log_terminal] [    3.107683] Serial: 8250/16550 driver, 4 ports, IRQ sharing enabled
+[init -> log_terminal] [    3.149253] SuperH (H)SCI(F) driver initialized
+[init -> log_terminal] [    3.179697] msm_serial: driver initialized
+[init -> log_terminal] [    3.215892] console [hvc0] enabled
+[init -> log_terminal] [    3.238341] bootconsole [pl11] disabled
+[init -> vm] [    3.275039] loop: module loaded
+[init -> vm] [    3.289158] libphy: Fixed MDIO Bus: probed
+[init -> vm] [    3.298628] tun: Universal TUN/TAP device driver, 1.6
+[init -> vmm] Warning: Could not find address=0xfc width=0x4
+[init -> vmm] Warning: Will ignore invalid bus access (IPA=0xa0002fc)
+[init -> vmm] Warning: Could not find address=0xfc width=0x4
+[init -> vmm] Warning: Will ignore invalid bus access (IPA=0xa0002fc)
+[init -> vm] [    3.347881] thunder_xcv, ver 1.0
+[init -> vm] [    3.355043] thunder_bgx, ver 1.0
+[init -> vm] [    3.361956] nicpf, ver 1.0
+[init -> vm] [    3.368149] e1000e: Intel(R) PRO/1000 Network Driver - 3.2.6-k
+[init -> vm] [    3.378024] e1000e: Copyright(c) 1999 - 2015 Intel Corporation.
+[init -> vm] [    3.387860] igb: Intel(R) Gigabit Ethernet Network Driver - version 5.4.0-k
+[init -> vm] [    3.399158] igb: Copyright (c) 2007-2014 Intel Corporation.
+[init -> vm] [    3.408361] igbvf: Intel(R) Gigabit Virtual Function Network Driver - version 2.4.0-k
+[init -> vm] [    3.420312] igbvf: Copyright (c) 2009 - 2012 Intel Corporation.
+[init -> vm] [    3.430355] sky2: driver version 1.30
+[init -> vm] [    3.438477] VFIO - User Level meta-driver version: 0.3
+[init -> vm] [    3.454516] ehci_hcd: USB 2.0 'Enhanced' Host Controller (EHCI) Driver
+[init -> vm] [    3.466045] ehci-pci: EHCI PCI platform driver
+[init -> vm] [    3.474119] ehci-platform: EHCI generic platform driver
+[init -> vm] [    3.483078] ehci-orion: EHCI orion driver
+[init -> vm] [    3.490485] ehci-exynos: EHCI EXYNOS driver
+[init -> vm] [    3.498087] ohci_hcd: USB 1.1 'Open' Host Controller (OHCI) Driver
+[init -> vm] [    3.508136] ohci-pci: OHCI PCI platform driver
+[init -> vm] [    3.516185] ohci-platform: OHCI generic platform driver
+[init -> vm] [    3.525074] ohci-exynos: OHCI EXYNOS driver
+[init -> vm] [    3.532986] usbcore: registered new interface driver usb-storage
+[init -> vm] [    3.546272] i2c /dev entries driver
+[init -> vm] [    3.559848] sdhci: Secure Digital Host Controller Interface driver
+[init -> vm] [    3.572329] sdhci: Copyright(c) Pierre Ossman
+[init -> vm] [    3.580740] Synopsys Designware Multimedia Card Interface Driver
+[init -> vm] [    3.591639] sdhci-pltfm: SDHCI platform and OF driver helper
+[init -> vm] [    3.602830] ledtrig-cpu: registered to indicate activity on CPUs
+[init -> vm] [    3.615151] usbcore: registered new interface driver usbhid
+[init -> vm] [    3.625322] usbhid: USB HID core driver
+[init -> vm] [    3.635839] NET: Registered protocol family 17
+[init -> vm] [    3.645341] 9pnet: Installing 9P2000 support
+[init -> vm] [    3.653313] Key type dns_resolver registered
+[init -> vm] [    3.662245] registered taskstats version 1
+[init -> vm] [    3.670120] Loading compiled-in X.509 certificates
+[init -> vm] [    3.678781] hctosys: unable to open rtc device (rtc0)
+[init -> vm] [    3.687480] ALSA device list:
+[init -> vm] [    3.694017]   No soundcards found.
+[init -> vm] [    3.701427] Freeing unused kernel memory: 1344K
+[init -> vm] [    3.709576] Run /bin/sh as init process
+[init -> vm] /bin/sh: can't access tty; job control turned off
+[init -> vm] / # sleep 1
+[init -> vm] / # 
+[init -> vm] / # sleep 1
+[init -> vm] / # 
+[init -> vm] / # sleep 1
+[init -> vm] / # 
+[init -> vm] / # sleep 1
+[init -> vm] / # 
+[init -> vm] / # sleep 1
+[init -> vmm] Start test 1
+Remove_func::BLOCK::INVALID
+_update_cache::addr: 0xffffffd000635000, size: 0x8
+Remove_func::BLOCK::INVALID
+_update_cache::addr: 0xffffffd000635008, size: 0x8
+Remove_func::BLOCK::INVALID
+_update_cache::addr: 0xffffffd000635010, size: 0x8
+Remove_func::BLOCK::INVALID
+_update_cache::addr: 0xffffffd000635018, size: 0x8
+Remove_func::BLOCK::INVALID
+_update_cache::addr: 0xffffffd000635020, size: 0x8
+Remove_func::BLOCK::INVALID
+_update_cache::addr: 0xffffffd000635028, size: 0x8
+Remove_func::BLOCK::INVALID
+_update_cache::addr: 0xffffffd000635030, size: 0x8
+Remove_func::BLOCK::INVALID
+_update_cache::addr: 0xffffffd000635038, size: 0x8
+Remove_func::BLOCK::INVALID
+_update_cache::addr: 0xffffffd000635040, size: 0x8
+Remove_func::BLOCK::INVALID
+_update_cache::addr: 0xffffffd000635048, size: 0x8
+Remove_func::BLOCK::INVALID
+_update_cache::addr: 0xffffffd000635050, size: 0x8
+Remove_func::BLOCK::INVALID
+_update_cache::addr: 0xffffffd000635058, size: 0x8
+Remove_func::BLOCK::INVALID
+_update_cache::addr: 0xffffffd000635060, size: 0x8
+Remove_func::BLOCK::INVALID
+_update_cache::addr: 0xffffffd000635068, size: 0x8
+Remove_func::BLOCK::INVALID
+_update_cache::addr: 0xffffffd000635070, size: 0x8
+Remove_func::BLOCK::INVALID
+_update_cache::addr: 0xffffffd000635078, size: 0x8
+Remove_func::BLOCK::INVALID
+_update_cache::addr: 0xffffffd000635080, size: 0x8
+Remove_func::BLOCK::INVALID
+_update_cache::addr: 0xffffffd000635088, size: 0x8
+Remove_func::BLOCK::INVALID
+_update_cache::addr: 0xffffffd000635090, size: 0x8
+Remove_func::BLOCK::INVALID
+_update_cache::addr: 0xffffffd000635098, size: 0x8
+Remove_func::BLOCK::INVALID
+_update_cache::addr: 0xffffffd0006350a0, size: 0x8
+Remove_func::BLOCK::INVALID
+_update_cache::addr: 0xffffffd0006350a8, size: 0x8
+Remove_func::BLOCK::INVALID
+_update_cache::addr: 0xffffffd0006350b0, size: 0x8
+Remove_func::BLOCK::INVALID
+_update_cache::addr: 0xffffffd0006350b8, size: 0x8
+Remove_func::BLOCK::INVALID
+_update_cache::addr: 0xffffffd0006350c0, size: 0x8
+Remove_func::BLOCK::INVALID
+_update_cache::addr: 0xffffffd0006350c8, size: 0x8
+Remove_func::BLOCK::INVALID
+_update_cache::addr: 0xffffffd0006350d0, size: 0x8
+Remove_func::BLOCK::INVALID
+_update_cache::addr: 0xffffffd0006350d8, size: 0x8
+Remove_func::BLOCK::INVALID
+_update_cache::addr: 0xffffffd0006350e0, size: 0x8
+Remove_func::BLOCK::INVALID
+_update_cache::addr: 0xffffffd0006350e8, size: 0x8
+Remove_func::BLOCK::INVALID
+_update_cache::addr: 0xffffffd0006350f0, size: 0x8
+Remove_func::BLOCK::INVALID
+_update_cache::addr: 0xffffffd0006350f8, size: 0x8
+remove_translation
+_update_cache::addr: 0xffffffd000635000, size: 0x8
+Remove_func::TABLE
+Remove_func::BLOCK::INVALID
+_update_cache::addr: 0xffffffd000634008, size: 0x8
+remove_translation
+_update_cache::addr: 0xffffffd000634000, size: 0x8
+Vm::invalidate_tlb_vm()
+[init -> vmm] entire detach
+ 
+U-Boot SPL 2019.04-04771-g4d377539a1-dirty (Mar 05 2020 - 14:57:16 +0100)
+PMIC:  PFUZE100 ID=0x10
+DDRINFO: start DRAM init
+DDRINFO:ddrphy calibration done
+DDRINFO: ddrmix config done
+Normal Boot
+Trying to boot from MMC2
+
+
+U-Boot 2019.04-04771-g4d377539a1-dirty (Mar 05 2020 - 14:13:51 +0100)
+
+CPU:   Freescale i.MX8MQ rev2.1 1500 MHz (running at 1000 MHz)
+CPU:   Commercial temperature grade (0C to 95C) at 38C
+Reset cause: POR
+Model: Freescale i.MX8MQ EVK
+DRAM:  3 GiB
+TCPC:  Vendor ID [0x1fc9], Product ID [0x5110], Addr [I2C0 0x50]
+MMC:   FSL_SDHC: 0, FSL_SDHC: 1
+Loading Environment from MMC... Run CMD11 1.8V switch
+OK
+No panel detected: default to HDMI
+Display: HDMI (1280x720)
+cdn_api_checkalive: keep-alive counter did not increment for 10us...
+HDMI enable failed!
+In:    serial
+Out:   serial
+Err:   serial
+
+ BuildInfo:
+  - ATF 413e93e
+  - U-Boot 2019.04-04771-g4d377539a1-dirty
+
+Run CMD11 1.8V switch
+switch to partitions #0, OK
+mmc1 is current device
+flash target is MMC:1
+Run CMD11 1.8V switch
+Net:   eth0: ethernet@30be0000
+Fastboot: Normal
+Normal Boot
+Hit any key to stop autoboot:  2  0
+u-boot=>          
