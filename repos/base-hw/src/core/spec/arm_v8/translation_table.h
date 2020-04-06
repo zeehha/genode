@@ -20,10 +20,7 @@
 
 
 template <unsigned BLOCK_SIZE_LOG2, unsigned SZ_LOG2>
-void Hw::Long_translation_table<BLOCK_SIZE_LOG2, SZ_LOG2>::_update_cache(unsigned long addr, unsigned long size, int dbg) {
-    if (dbg) {
-//        Genode::log("_update_cache::addr: ", Genode::Hex(addr), ", size: ", Genode::Hex(size));
-    }
+void Hw::Long_translation_table<BLOCK_SIZE_LOG2, SZ_LOG2>::_update_cache(unsigned long addr, unsigned long size) {
     Genode::Cpu::cache_coherent_region(addr, size);
 }
 

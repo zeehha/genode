@@ -312,7 +312,7 @@ class Hw::Long_translation_table
 			}
 		}
 
-        static inline void _update_cache(addr_t, size_t, int);
+        static inline void _update_cache(addr_t, size_t);
 
 public:
 
@@ -363,8 +363,7 @@ class Hw::Level_3_translation_table :
 						throw Double_insertion();
 
                     desc = blk_desc;
-                    int dbg = 0;
-                    Level_3_translation_table::_update_cache((addr_t) &desc, sizeof(desc), dbg);
+                    Level_3_translation_table::_update_cache((addr_t) &desc, sizeof(desc));
 				}
 		};
 
@@ -377,8 +376,7 @@ class Hw::Level_3_translation_table :
 				                  size_t /* size */,
 				                  Descriptor::access_t &desc) {
 					desc = 0;
-                    int dbg = 0;
-                    Level_3_translation_table::_update_cache((addr_t) &desc, sizeof(desc), dbg);
+                    Level_3_translation_table::_update_cache((addr_t) &desc, sizeof(desc));
 				}
 		};
 
@@ -412,16 +410,18 @@ class Hw::Level_3_translation_table :
 		                        Page_flags const & flags,
 		                        Allocator &) {
 			_range_op(vo, pa, size, Insert_func(flags));
-            int dbg = 0;
-            Level_3_translation_table::_update_cache((addr_t) this, sizeof(this), dbg);
+
+            /* table descriptor cache update */
+            Level_3_translation_table::_update_cache((addr_t) this, sizeof(this));
 		}
 
 		void remove_translation(addr_t vo, size_t size, Allocator&)
 		{
 			addr_t pa = 0;
 			_range_op(vo, pa, size, Remove_func());
-            int dbg = 0;
-            Level_3_translation_table::_update_cache((addr_t) this, sizeof(this), dbg);
+
+            /* table descriptor cache update */
+            Level_3_translation_table::_update_cache((addr_t) this, sizeof(this));
 		}
 
 		bool lookup_translation(addr_t vo, addr_t & pa, Allocator&)
@@ -477,8 +477,7 @@ class Hw::Level_x_translation_table :
 					if (Descriptor::valid(desc) && desc != blk_desc)
 						throw typename Base::Double_insertion();
 					desc = blk_desc;
-					int dbg = 0;
-                    Level_x_translation_table::_update_cache((addr_t) &desc, sizeof(desc), dbg);
+                    Level_x_translation_table::_update_cache((addr_t) &desc, sizeof(desc));
 					return;
 				}
 
@@ -487,11 +486,10 @@ class Hw::Level_x_translation_table :
 
 				case Descriptor::INVALID: /* no entry */
 					{
-                        int dbg = 0;
 						/* create and link next level table */
 						E & table = alloc.construct<E>();
 						desc = Table_descriptor::create((void*)alloc.phys_addr(table));
-						Level_x_translation_table::_update_cache((addr_t) &desc, sizeof(desc), dbg);
+						Level_x_translation_table::_update_cache((addr_t) &desc, sizeof(desc));
 					}
 					[[fallthrough]];
 				case Descriptor::TABLE: /* table already available */
@@ -540,9 +538,8 @@ class Hw::Level_x_translation_table :
 				case Descriptor::BLOCK: [[fallthrough]];
 				case Descriptor::INVALID:
 					{
-                        int dbg = 0;
 						desc = 0;
-                        Level_x_translation_table::_update_cache((addr_t) &desc, sizeof(desc), dbg);
+                        Level_x_translation_table::_update_cache((addr_t) &desc, sizeof(desc));
 					}
 				}
 			}
@@ -611,9 +608,8 @@ public:
 		                        Allocator        & alloc) {
 			this->_range_op(vo, pa, size, Insert_func<ENTRY>(flags, alloc));
 
-            int dbg = 0;
             /* table descriptor cache update */
-            Level_x_translation_table::_update_cache((addr_t) this, sizeof(this), dbg);
+            Level_x_translation_table::_update_cache((addr_t) this, sizeof(this));
 		}
 
 		/**
@@ -629,9 +625,8 @@ public:
 			addr_t pa = 0;
 			this->_range_op(vo, pa, size, Remove_func<ENTRY>(alloc));
 
-            int dbg = 0;
             /* table descriptor cache update */
-            Level_x_translation_table::_update_cache((addr_t) this, sizeof(this), dbg);
+            Level_x_translation_table::_update_cache((addr_t) this, sizeof(this));
 		}
 
 		/**
