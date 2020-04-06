@@ -34,10 +34,8 @@ void Vm_session_component::_attach(addr_t phys_addr, addr_t vm_addr, size_t size
 	Page_flags pflags { RW, NO_EXEC, USER, NO_GLOBAL, RAM, CACHED };
 
 	try {
-	  Genode::log("Vm_session_component::insert_translation::virt_addr vttbr_el2: ", Genode::Hex((addr_t) &_table));
 		_table.insert_translation(vm_addr, phys_addr, size, pflags,
 		                          _table_array.alloc());
-
 		Kernel::Vm::invalidate_tlb_vm();
 		return;
 	} catch(Hw::Out_of_tables &) {

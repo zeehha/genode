@@ -229,6 +229,4 @@ void Vm::invalidate_tlb_vm() {
      * set invalidation flag; invalidation is done by the hypervisor
      */
     _inval_tlb_vm = true;
-    Genode::log("Vm::invalidate_tlb_vm()");
-
 }

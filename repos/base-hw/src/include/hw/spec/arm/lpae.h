@@ -364,7 +364,6 @@ class Hw::Level_3_translation_table :
 
                     desc = blk_desc;
                     int dbg = 0;
-                    dbg += 0;
                     Level_3_translation_table::_update_cache((addr_t) &desc, sizeof(desc), dbg);
 				}
 		};
@@ -379,7 +378,6 @@ class Hw::Level_3_translation_table :
 				                  Descriptor::access_t &desc) {
 					desc = 0;
                     int dbg = 0;
-                    dbg += 0;
                     Level_3_translation_table::_update_cache((addr_t) &desc, sizeof(desc), dbg);
 				}
 		};
@@ -415,7 +413,6 @@ class Hw::Level_3_translation_table :
 		                        Allocator &) {
 			_range_op(vo, pa, size, Insert_func(flags));
             int dbg = 0;
-            dbg += 0;
             Level_3_translation_table::_update_cache((addr_t) this, sizeof(this), dbg);
 		}
 
@@ -424,7 +421,6 @@ class Hw::Level_3_translation_table :
 			addr_t pa = 0;
 			_range_op(vo, pa, size, Remove_func());
             int dbg = 0;
-            dbg += 0;
             Level_3_translation_table::_update_cache((addr_t) this, sizeof(this), dbg);
 		}
 
@@ -482,10 +478,6 @@ class Hw::Level_x_translation_table :
 						throw typename Base::Double_insertion();
 					desc = blk_desc;
 					int dbg = 0;
-                    if (STAGE == STAGE2) {
-                        dbg = 1;
-                        Genode::log("Insert_func::CREATE_BLOCK");
-                    }
                     Level_x_translation_table::_update_cache((addr_t) &desc, sizeof(desc), dbg);
 					return;
 				}
@@ -496,10 +488,6 @@ class Hw::Level_x_translation_table :
 				case Descriptor::INVALID: /* no entry */
 					{
                         int dbg = 0;
-                        if (STAGE == STAGE2) {
-                            dbg = 1;
-                            Genode::log("Insert_func:CREATE_NEW_TABLE");
-                        }
 						/* create and link next level table */
 						E & table = alloc.construct<E>();
 						desc = Table_descriptor::create((void*)alloc.phys_addr(table));
@@ -508,17 +496,11 @@ class Hw::Level_x_translation_table :
 					[[fallthrough]];
 				case Descriptor::TABLE: /* table already available */
 					{
-                        int dbg = 0;
                         /* use allocator to retrieve virt address of table */
 						E & table = alloc.virt_addr<E>(Nt::masked(desc));
 						table.insert_translation(vo - (vo & Base::BLOCK_MASK),
 						                         pa, size, flags, alloc);
-                        if (STAGE == STAGE2) {
-                            dbg = 1;
-                            Genode::log("Insert_func::TABLE_EXISTS");
-                        }
 
-//						Level_x_translation_table::_update_cache((addr_t) &table, sizeof(desc), dbg);
 						break;
 					}
 
@@ -552,13 +534,6 @@ class Hw::Level_x_translation_table :
 						E & table = alloc.virt_addr<E>(Nt::masked(desc));
 						table.remove_translation(vo - (vo & Base::BLOCK_MASK),
 						                         size, alloc);
-                        int dbg = 0;
-                        if (STAGE == STAGE2) {
-                            dbg = 1;
-                            Genode::log("Remove_func::TABLE");
-                        }
-                        dbg += 0;
-//						Level_x_translation_table::_update_cache((addr_t) &table, sizeof(table), dbg);
 						if (!table.empty()) break;
 						alloc.destruct<E>(table);
 					} [[fallthrough]];
@@ -566,10 +541,6 @@ class Hw::Level_x_translation_table :
 				case Descriptor::INVALID:
 					{
                         int dbg = 0;
-                        if (STAGE == STAGE2) {
-                            dbg = 1;
-                            Genode::log("Remove_func::BLOCK::INVALID");
-                        }
 						desc = 0;
                         Level_x_translation_table::_update_cache((addr_t) &desc, sizeof(desc), dbg);
 					}
@@ -639,11 +610,8 @@ public:
 		                        Page_flags const & flags,
 		                        Allocator        & alloc) {
 			this->_range_op(vo, pa, size, Insert_func<ENTRY>(flags, alloc));
+
             int dbg = 0;
-            if (STAGE == STAGE2) {
-                dbg = 1;
-                Genode::log("insert_translation");
-            }
             /* table descriptor cache update */
             Level_x_translation_table::_update_cache((addr_t) this, sizeof(this), dbg);
 		}
@@ -662,10 +630,6 @@ public:
 			this->_range_op(vo, pa, size, Remove_func<ENTRY>(alloc));
 
             int dbg = 0;
-            if (STAGE == STAGE2) {
-                dbg = 1;
-                Genode::log("remove_translation");
-            }
             /* table descriptor cache update */
             Level_x_translation_table::_update_cache((addr_t) this, sizeof(this), dbg);
 		}
