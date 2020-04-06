@@ -20,7 +20,7 @@
 #define SZ_SUPERPAGE 0x200000
 #define TEN_SECS 10*1000*1000
 #define NUM_SUPERPAGES (SZ_RAM / SZ_SUPERPAGE)
-#define TEST_CASE 1
+#define TEST_CASE 2
 
 namespace Vmm {
     class Tester;
