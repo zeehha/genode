@@ -475,7 +475,7 @@ class Hw::Level_x_translation_table :
 
 				/* can we insert a whole block? */
 				if (!((vo & ~Base::BLOCK_MASK) || (pa & ~Base::BLOCK_MASK) ||
-				      size < Base::BLOCK_SIZE) && 0) {
+				      size < Base::BLOCK_SIZE)) {
 					typename Descriptor::access_t blk_desc =
 						Block_descriptor::create(flags, pa);
 					if (Descriptor::valid(desc) && desc != blk_desc)
