@@ -362,8 +362,10 @@ class Hw::Level_3_translation_table :
 					if (Descriptor::valid(desc) && desc != blk_desc)
 						throw Double_insertion();
 
-					/* cache maintenance done by l2-table */
                     desc = blk_desc;
+                    int dbg = 0;
+                    dbg += 0;
+                    Level_3_translation_table::_update_cache((addr_t) &desc, sizeof(desc), dbg);
 				}
 		};
 
@@ -375,8 +377,11 @@ class Hw::Level_3_translation_table :
 				                  addr_t /* pa */,
 				                  size_t /* size */,
 				                  Descriptor::access_t &desc) {
-                    /* cache maintenance done by l2-table */
-					desc = 0; }
+					desc = 0;
+                    int dbg = 0;
+                    dbg += 0;
+                    Level_3_translation_table::_update_cache((addr_t) &desc, sizeof(desc), dbg);
+				}
 		};
 
 		struct Lookup_func
@@ -408,12 +413,19 @@ class Hw::Level_3_translation_table :
 		                        size_t size,
 		                        Page_flags const & flags,
 		                        Allocator &) {
-			_range_op(vo, pa, size, Insert_func(flags)); }
+			_range_op(vo, pa, size, Insert_func(flags));
+            int dbg = 0;
+            dbg += 0;
+            Level_3_translation_table::_update_cache((addr_t) this, sizeof(this), dbg);
+		}
 
 		void remove_translation(addr_t vo, size_t size, Allocator&)
 		{
 			addr_t pa = 0;
 			_range_op(vo, pa, size, Remove_func());
+            int dbg = 0;
+            dbg += 0;
+            Level_3_translation_table::_update_cache((addr_t) this, sizeof(this), dbg);
 		}
 
 		bool lookup_translation(addr_t vo, addr_t & pa, Allocator&)
@@ -463,7 +475,7 @@ class Hw::Level_x_translation_table :
 
 				/* can we insert a whole block? */
 				if (!((vo & ~Base::BLOCK_MASK) || (pa & ~Base::BLOCK_MASK) ||
-				      size < Base::BLOCK_SIZE)) {
+				      size < Base::BLOCK_SIZE) && 0) {
 					typename Descriptor::access_t blk_desc =
 						Block_descriptor::create(flags, pa);
 					if (Descriptor::valid(desc) && desc != blk_desc)
@@ -496,15 +508,16 @@ class Hw::Level_x_translation_table :
 					[[fallthrough]];
 				case Descriptor::TABLE: /* table already available */
 					{
-//                        int dbg = 0;
+                        int dbg = 0;
                         /* use allocator to retrieve virt address of table */
 						E & table = alloc.virt_addr<E>(Nt::masked(desc));
 						table.insert_translation(vo - (vo & Base::BLOCK_MASK),
 						                         pa, size, flags, alloc);
                         if (STAGE == STAGE2) {
-//                            dbg = 1;
+                            dbg = 1;
                             Genode::log("Insert_func::TABLE_EXISTS");
                         }
+
 //						Level_x_translation_table::_update_cache((addr_t) &table, sizeof(desc), dbg);
 						break;
 					}
