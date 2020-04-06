@@ -173,7 +173,7 @@ build { app/sequence app/fs_query }
 
 build_boot_image { sequence fs_query }
 
-append qemu_args " -nographic -serial mon:stdio "
+append qemu_args " -nographic "
 
 run_genode_until {.*child "test" exited with exit value 0.*\n} 50
 
