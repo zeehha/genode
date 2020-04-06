@@ -66,7 +66,7 @@ void Vm_session_component::attach_pic(addr_t vm_addr)
 
 void Vm_session_component::_detach_vm_memory(addr_t vm_addr, size_t size)
 {
-		_table.remove_translation(vm_addr, size, _table_array.alloc());
+    _table.remove_translation(vm_addr, size, _table_array.alloc());
     Kernel::Vm::invalidate_tlb_vm();
 }
 

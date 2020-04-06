@@ -377,5 +377,3 @@ _flush_tlb_vm:
 hypervisor_enter_vm:
 	hvc #0
 
-
-

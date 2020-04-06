@@ -651,7 +651,7 @@ public:
             int dbg = 0;
             if (STAGE == STAGE2) {
                 dbg = 1;
-                Genode::log("insert_translation");
+                Genode::log("remove_translation");
             }
             /* table descriptor cache update */
             Level_x_translation_table::_update_cache((addr_t) this, sizeof(this), dbg);
