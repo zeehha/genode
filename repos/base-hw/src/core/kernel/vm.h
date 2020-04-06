@@ -54,6 +54,7 @@ class Kernel::Vm : public Cpu_job
 		void             * const    _table;
 		Scheduler_state             _scheduled = INACTIVE;
 		Board::Vcpu_context         _vcpu_context;
+		static bool                 _inval_tlb_vm;
 
 	public:
 
@@ -136,6 +137,7 @@ class Kernel::Vm : public Cpu_job
 		void exception(Cpu & cpu) override;
 		void proceed(Cpu &  cpu)  override;
 		Cpu_job * helping_sink()  override { return this; }
+		static void invalidate_tlb_vm();
 };
 
 #endif /* _CORE__KERNEL__VM_H_ */
