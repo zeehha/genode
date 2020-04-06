@@ -54,6 +54,15 @@ class Kernel::Vm : public Cpu_job
 		void             * const    _table;
 		Scheduler_state             _scheduled = INACTIVE;
 		Board::Vcpu_context         _vcpu_context;
+		
+		/* This flag tells the hypervisor, that it 
+		 * should invalidate TLB entries for all VMs
+		 * on a worldswitch.
+		 *
+		 * Additional kernel-API would allow to set 
+     * it per VM (not static), such that TLB-invalidation 
+		 * is possible respective to the VMID.			
+		 */	 
 		static bool                 _inval_tlb_vm;
 
 	public:

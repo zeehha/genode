@@ -369,7 +369,7 @@ _vm_to_host:
 	eret
 
 _flush_tlb_vm:
-    tlbi alle1
+    tlbi alle1					/* this should be done respective to the VMID */
     br x5               /* return to _host_to_vm */
 
 /* host kernel must jump to this point to switch to a vm */
