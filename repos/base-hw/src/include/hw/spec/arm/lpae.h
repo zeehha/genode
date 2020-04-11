@@ -410,18 +410,12 @@ class Hw::Level_3_translation_table :
 		                        Page_flags const & flags,
 		                        Allocator &) {
 			_range_op(vo, pa, size, Insert_func(flags));
-
-            /* table descriptor cache update */
-            Level_3_translation_table::_update_cache((addr_t) this, sizeof(this));
 		}
 
 		void remove_translation(addr_t vo, size_t size, Allocator&)
 		{
 			addr_t pa = 0;
 			_range_op(vo, pa, size, Remove_func());
-
-            /* table descriptor cache update */
-            Level_3_translation_table::_update_cache((addr_t) this, sizeof(this));
 		}
 
 		bool lookup_translation(addr_t vo, addr_t & pa, Allocator&)
@@ -608,9 +602,6 @@ public:
 		                        Page_flags const & flags,
 		                        Allocator        & alloc) {
 			this->_range_op(vo, pa, size, Insert_func<ENTRY>(flags, alloc));
-
-            /* table descriptor cache update */
-            Level_x_translation_table::_update_cache((addr_t) this, sizeof(this));
 		}
 
 		/**
@@ -625,9 +616,6 @@ public:
 		{
 			addr_t pa = 0;
 			this->_range_op(vo, pa, size, Remove_func<ENTRY>(alloc));
-
-            /* table descriptor cache update */
-            Level_x_translation_table::_update_cache((addr_t) this, sizeof(this));
 		}
 
 		/**
