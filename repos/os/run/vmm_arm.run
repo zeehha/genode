@@ -61,8 +61,8 @@ install_config {
 		<resource name="RAM" quantum="1M"/>
 		<provides> <service name="Terminal"/> </provides>
 	</start>
-	<start name="vmm" caps="200" priority="-1">
-		<resource name="RAM" quantum="256M"/>
+	<start name="vmm" caps="700" priority="-1">
+		<resource name="RAM" quantum="512M"/>
 		<route>
 			<service name="Terminal" label="earlycon"> <child name="log_terminal"/> </service>
 			<service name="Terminal"> <child name="terminal_crosslink"/> </service>

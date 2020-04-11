@@ -17,9 +17,16 @@
 
 #define BASE_RAM 0x40000000
 #define SZ_RAM (64 * 1024 *1024)
-#define SZ_SUPERPAGE 0x200000
+#define USE_SUPERPAGES 0
+
+#if USE_SUPERPAGES
+#define SZ_PAGE 0x200000
+#else
+#define SZ_PAGE 0x1000
+#endif
+
 #define TEN_SECS 10*1000*1000
-#define NUM_SUPERPAGES (SZ_RAM / SZ_SUPERPAGE)
+#define NUM_PAGES (SZ_RAM / SZ_PAGE)
 #define TEST_CASE 2
 
 namespace Vmm {
@@ -41,7 +48,7 @@ class Vmm::Tester {
 
         bool _attach_pages { false };
         int  _num_attached_pages;
-        bool _page_attached[NUM_SUPERPAGES];
+        bool _page_attached[NUM_PAGES];
 
         void _attach_remaining();
         void _start_test(Genode::Duration);

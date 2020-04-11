@@ -9,20 +9,18 @@ void Tester::attach_page(Genode::addr_t fault_addr) {
         return;
     }
 
-    Genode::uint64_t bm = ~(SZ_SUPERPAGE - 1);
+    Genode::uint64_t bm = ~(SZ_PAGE - 1);
     fault_addr &= bm;
-
-//    Genode::log("attach page ", Genode::Hex(fault_addr));
 
     Genode::uint64_t offset = fault_addr - BASE_RAM;
     Genode::Vm_session::Attach_attr attr = {
             .offset = offset,
-            .size = SZ_SUPERPAGE,
+            .size = SZ_PAGE,
             .writeable = true
     };
     _vm.attach(_vm_ram.cap(), BASE_RAM + offset, attr);
 
-    _page_attached[offset / SZ_SUPERPAGE] = true;
+    _page_attached[offset / SZ_PAGE] = true;
     _num_attached_pages++;
     if(_num_attached_pages > 9) {
         _attach_remaining();
@@ -33,20 +31,20 @@ void Tester::_attach_remaining() {
 
     Genode::Vm_session::Attach_attr attr = {
             .offset = 0,
-            .size = SZ_SUPERPAGE,
+            .size = SZ_PAGE,
             .writeable = true
     };
 
-    for (int i = 0; i < NUM_SUPERPAGES; i++) {
+    for (int i = 0; i < NUM_PAGES; i++) {
         if (!_page_attached[i]) {
-            attr.offset = i * SZ_SUPERPAGE;
+            attr.offset = i * SZ_PAGE;
             _vm.attach(_vm_ram.cap(), BASE_RAM + attr.offset, attr);
             _page_attached[i] = true;
         }
     }
 
     _rdy_for_test = true;
-    _num_attached_pages = NUM_SUPERPAGES;
+    _num_attached_pages = NUM_PAGES;
     Genode::log("all pages attached");
 }
 
@@ -61,8 +59,8 @@ void Tester::_detach_individually() {
     _rdy_for_test = false;
     _num_attached_pages = 0;
 
-    for (int i = 0; i < NUM_SUPERPAGES; i++) {
-        _vm.detach(BASE_RAM + i*SZ_SUPERPAGE, SZ_SUPERPAGE);
+    for (int i = 0; i < NUM_PAGES; i++) {
+        _vm.detach(BASE_RAM + i*SZ_PAGE, SZ_PAGE);
     }
 
     Genode::log("individual detach");
@@ -77,7 +75,7 @@ void Tester::_prepare_test_env() {
     _rdy_for_test = false;
     _num_attached_pages = 0;
 
-    for (int i = 0; i < NUM_SUPERPAGES; i++ ) {
+    for (int i = 0; i < NUM_PAGES; i++ ) {
         _page_attached[i] = false;
     }
 }
