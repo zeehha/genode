@@ -498,8 +498,8 @@ class Hw::Level_x_translation_table :
 						E & table = alloc.virt_addr<E>(Nt::masked(desc));
 						table.insert_translation(vo - (vo & Base::BLOCK_MASK),
 						                         pa, size, flags, alloc);
-
-						break;
+                        Level_x_translation_table::_update_cache((addr_t) &table, sizeof(table));
+                        break;
 					}
 
 				case Descriptor::BLOCK: /* there is already a block */
@@ -532,6 +532,7 @@ class Hw::Level_x_translation_table :
 						E & table = alloc.virt_addr<E>(Nt::masked(desc));
 						table.remove_translation(vo - (vo & Base::BLOCK_MASK),
 						                         size, alloc);
+                        Level_x_translation_table::_update_cache((addr_t) &table, sizeof(table));
 						if (!table.empty()) break;
 						alloc.destruct<E>(table);
 					} [[fallthrough]];
