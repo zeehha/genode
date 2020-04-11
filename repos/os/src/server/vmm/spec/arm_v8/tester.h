@@ -27,7 +27,7 @@
 
 #define TEN_SECS 10*1000*1000
 #define NUM_PAGES (SZ_RAM / SZ_PAGE)
-#define TEST_CASE 2
+#define TEST_CASE 6
 
 namespace Vmm {
     class Tester;
@@ -46,7 +46,8 @@ class Vmm::Tester {
 
         bool _rdy_for_test { true };
 
-        bool _attach_pages { false };
+        bool _attach_pages_on_fault { false };
+        bool _attach_pages_remaining { false };
         int  _num_attached_pages;
         bool _page_attached[NUM_PAGES];
 

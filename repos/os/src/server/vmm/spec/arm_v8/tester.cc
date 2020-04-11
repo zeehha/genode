@@ -5,7 +5,7 @@ using Vmm::Tester;
 
 void Tester::attach_page(Genode::addr_t fault_addr) {
 
-    if (!_attach_pages) {
+    if (!_attach_pages_on_fault) {
         return;
     }
 
@@ -22,7 +22,7 @@ void Tester::attach_page(Genode::addr_t fault_addr) {
 
     _page_attached[offset / SZ_PAGE] = true;
     _num_attached_pages++;
-    if(_num_attached_pages > 9) {
+    if(_num_attached_pages > 9 && _attach_pages_remaining) {
         _attach_remaining();
     }
 }
@@ -92,7 +92,8 @@ void Tester::_start_test(Genode::Duration) {
     if (TEST_CASE == 1) {
         Genode::log("Start test 1");
         _detach_entirely();
-        _attach_pages = false;
+        _attach_pages_on_fault = false;
+        _attach_pages_remaining = false;
     }
 
     /* Test 2: (1) detach entire guest ram,
@@ -102,17 +103,19 @@ void Tester::_start_test(Genode::Duration) {
     if (TEST_CASE == 2) {
         Genode::log("Start test 2");
         _detach_entirely();
-        _attach_pages = true;
-
+        _attach_pages_on_fault = true;
+        _attach_pages_remaining = true;
+        _timeout.schedule(Genode::Microseconds(TEN_SECS));
     }
 
-    /* Test 3: (1) detach guest ram page by page,
+    /* Test 3: (1) detach all pages individually,
      *             this causes constant page faults
      *         */
     if (TEST_CASE == 3) {
         Genode::log("Start test 3");
         _detach_individually();
-        _attach_pages = false;
+        _attach_pages_on_fault = false;
+        _attach_pages_remaining = false;
     }
 
 
@@ -120,16 +123,40 @@ void Tester::_start_test(Genode::Duration) {
      *         (2) attach single page on fault
      *         (3) after 10 pages are attached, attach rest
      *         */
-
     if (TEST_CASE == 4) {
         Genode::log("Start test 4");
         _detach_individually();
-        _attach_pages = true;
+        _attach_pages_on_fault = true;
+        _attach_pages_remaining = true;
+        _timeout.schedule(Genode::Microseconds(TEN_SECS));
     }
 
-    _timeout.schedule(Genode::Microseconds(TEN_SECS));
-    _cpu.run();
+    /* Test 5: (1) detach entire guest ram,
+     *         (2) attach single page on fault
+     *         */
+    if (TEST_CASE == 5) {
+        Genode::log("Start test 5");
+        _detach_entirely();
+        _attach_pages_on_fault = true;
+        _attach_pages_remaining = false;
+        _timeout.schedule(Genode::Microseconds(TEN_SECS));
+    }
 
+    /* Test 6: (1) detach all pages individually,
+     *         (2) attach single page on fault
+     *         */
+    if (TEST_CASE == 6) {
+        Genode::log("Start test 6");
+        _detach_individually();
+        _attach_pages_on_fault = true;
+        _attach_pages_remaining = false;
+        _timeout.schedule(Genode::Microseconds(TEN_SECS));
+    }
+
+    /* Test 7-12: set USE_SUERPAGE to 0
+     *         */
+
+    _cpu.run();
 }
 
 
