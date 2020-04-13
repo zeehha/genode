@@ -264,9 +264,18 @@ class Hw::Long_translation_table
 			using Base = Block_descriptor_base;
 
 			struct Mem_attr : Block_descriptor_base::template Bitfield<2,4>{};
-			struct Hap      : Block_descriptor_base::template Bitfield<6,2>{};
+			struct Hap      : Block_descriptor_base::template Bitfield<6,2> {
 
-			static typename Descriptor::access_t create(Page_flags const &,
+			     enum { NO_ACCESS, RO, WO, WR };
+
+			     static typename Descriptor::access_t create(Page_flags const &f)
+                 {
+                   if (f.writeable) { return Hap::bits(WR); }
+                   else             { return Hap::bits(RO); }
+                 }
+			};
+
+			static typename Descriptor::access_t create(Page_flags const & f,
 			                                            addr_t const pa)
 			{
 				return Base::Shareability::bits(
@@ -275,7 +284,8 @@ class Hw::Long_translation_table
 					| Base::Access_flag::bits(1)
 					| Descriptor::Valid::bits(1)
 					| Mem_attr::bits(0xf)
-					| Hap::bits(0x3);
+//					| Hap::bits(0x3);
+                    | Hap::create(f);
 			}
 		};
 
@@ -602,6 +612,10 @@ public:
 		                        Page_flags const & flags,
 		                        Allocator        & alloc) {
 			this->_range_op(vo, pa, size, Insert_func<ENTRY>(flags, alloc));
+			if(STAGE == STAGE2) {
+			    Genode::log("insert_translation::", Genode::Hex((Genode::addr_t) this));
+			}
+
 		}
 
 		/**

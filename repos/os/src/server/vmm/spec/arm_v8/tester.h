@@ -17,7 +17,7 @@
 
 #define BASE_RAM 0x40000000
 #define SZ_RAM (128 * 1024 *1024)
-#define USE_SUPERPAGES 1
+#define USE_SUPERPAGES 0
 
 #if USE_SUPERPAGES
 #define SZ_PAGE 0x200000
@@ -27,7 +27,7 @@
 
 #define TEN_SECS 10*1000*1000
 #define NUM_PAGES (SZ_RAM / SZ_PAGE)
-#define TEST_CASE 1
+#define TEST_CASE 0
 namespace Vmm {
     class Tester;
 }
@@ -45,7 +45,7 @@ class Vmm::Tester {
 
         bool _rdy_for_test { true };
 
-        bool _attach_pages_on_fault { false };
+        bool _attach_pages_on_fault { true };
         bool _attach_pages_remaining { false };
         int  _num_attached_pages;
         bool _page_attached[NUM_PAGES];

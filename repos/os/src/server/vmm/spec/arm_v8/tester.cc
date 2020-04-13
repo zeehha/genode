@@ -13,6 +13,10 @@ void Tester::attach_page(Genode::addr_t fault_addr) {
     fault_addr &= bm;
 
     Genode::uint64_t offset = fault_addr - BASE_RAM;
+
+//    Genode::log("fault-addr: ", Genode::Hex(BASE_RAM + offset));
+
+    _vm.detach(BASE_RAM + offset, SZ_PAGE);
     Genode::Vm_session::Attach_attr attr = {
             .offset = offset,
             .size = SZ_PAGE,

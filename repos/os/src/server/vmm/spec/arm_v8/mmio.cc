@@ -99,7 +99,7 @@ void Vmm::Mmio_bus::handle_memory_access(Vmm::Cpu & cpu)
 	};
 
 	if (!Iss::valid(state.esr_el2))
-		throw Exception("Mmio_bus: unknown ESR=", Genode::Hex(state.esr_el2));
+		throw Exception("Mmio_bus: unknown ESR=", Genode::Hex(state.esr_el2), ", hpfar: ", Genode::Hex(state.hpfar_el2));
 
 	bool     wr    = Iss::Write::get(state.esr_el2);
 	unsigned idx   = Iss::Register::get(state.esr_el2);

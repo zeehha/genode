@@ -277,7 +277,9 @@ void Cpu::_handle_hyper_call()
 void Cpu::_handle_data_abort()
 {
     Genode::addr_t ipa = ((Genode::addr_t)_state.hpfar_el2 << 8);
-    if (BASE_RAM -1 < ipa && ipa < BASE_RAM + SZ_RAM) {
+    Genode::addr_t phys_dataspace_off = 0x8000000;
+    if (BASE_RAM -1 + phys_dataspace_off < ipa && ipa < BASE_RAM + SZ_RAM + phys_dataspace_off) {
+        ipa -= phys_dataspace_off;
         _tester.attach_page(ipa);
     } else {
         _vm.bus().handle_memory_access(*this);

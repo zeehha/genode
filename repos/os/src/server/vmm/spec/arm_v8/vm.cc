@@ -54,8 +54,14 @@ Vm::Vm(Genode::Env & env)
   _virtio_net("Net", 0xa000200, 0x200,  49, boot_cpu(), _bus, _ram, env),
   _tester(env, _vm, boot_cpu(), _vm_ram)
 {
-    
-	_vm.attach(_vm_ram.cap(), RAM_ADDRESS);
+
+    Genode::Vm_session::Attach_attr attr = {
+            .offset = 0,
+            .size = RAM_SIZE,
+            .writeable = false
+    };
+
+    _vm.attach(_vm_ram.cap(), RAM_ADDRESS, attr);
 
 	/* FIXME extend for gicv2 by: _vm.attach_pic(0x8010000); */
 

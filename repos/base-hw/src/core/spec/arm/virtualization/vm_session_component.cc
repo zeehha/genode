@@ -27,12 +27,19 @@ static Core_mem_allocator & cma() {
 	return static_cast<Core_mem_allocator&>(platform().core_mem_alloc()); }
 
 
-void Vm_session_component::_attach(addr_t phys_addr, addr_t vm_addr, size_t size)
+void Vm_session_component::_attach(addr_t phys_addr, addr_t vm_addr, size_t size,
+                                   Attach_attr const attr = {})
 {
 	using namespace Hw;
 
-	Page_flags pflags { RW, NO_EXEC, USER, NO_GLOBAL, RAM, CACHED };
+	Page_flags pflags;
+	if (!attr.writeable) {
+        pflags = { RO, NO_EXEC, USER, NO_GLOBAL, RAM, CACHED };
+    } else {
+	    pflags = { RW, NO_EXEC, USER, NO_GLOBAL, RAM, CACHED };
+	}
 
+	Genode::log("Vm_session_component::virt_addr: ", Genode::Hex((Genode::addr_t) &_table));
 	try {
 		_table.insert_translation(vm_addr, phys_addr, size, pflags,
 		                          _table_array.alloc());
@@ -51,7 +58,7 @@ void Vm_session_component::_attach_vm_memory(Dataspace_component &dsc,
                                              addr_t const vm_addr,
                                              Attach_attr const attribute)
 {
-	_attach(dsc.phys_addr() + attribute.offset, vm_addr, attribute.size);
+	_attach(dsc.phys_addr() + attribute.offset, vm_addr, attribute.size, attribute);
 }
 
 

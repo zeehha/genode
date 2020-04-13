@@ -71,7 +71,7 @@ class Genode::Vm_session_component
 		bool          _valid_id(Vcpu_id id) { return id.id < Board::VCPU_MAX; }
 		addr_t        _alloc_ds();
 		void *        _alloc_table();
-		void          _attach(addr_t phys_addr, addr_t vm_addr, size_t size);
+		void          _attach(addr_t phys_addr, addr_t vm_addr, size_t size, Attach_attr);
 		void          _attach_vm_memory(Dataspace_component &, addr_t,
 		                                Attach_attr);
 		void          _detach_vm_memory(addr_t, size_t);
