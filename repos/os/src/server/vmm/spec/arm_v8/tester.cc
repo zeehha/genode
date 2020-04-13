@@ -153,7 +153,8 @@ void Tester::_start_test(Genode::Duration) {
         _timeout.schedule(Genode::Microseconds(TEN_SECS));
     }
 
-    /* Test 7-12: set USE_SUERPAGE to 0
+    /* Test 7-12: set USE_SUERPAGE to 0 and
+     *            do tests 1-6 again
      *         */
 
     _cpu.run();

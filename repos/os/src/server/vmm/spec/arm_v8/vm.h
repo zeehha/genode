@@ -37,10 +37,10 @@ class Vmm::Vm
 
 		enum {
 			RAM_ADDRESS   = 0x40000000,
-			RAM_SIZE      = 64 * 1024 *1024,
+			RAM_SIZE      = 128 * 1024 *1024,
 			KERNEL_OFFSET = 0x80000,
 			INITRD_OFFSET = 32 * 1024 * 1024,
-			DTB_OFFSET    = 0x3000000,
+			DTB_OFFSET    = 64 * 1024 * 1024,
 			MAX_CPUS      = 1,
 			STACK_SIZE    = sizeof(unsigned long) * 2048,
 		};
