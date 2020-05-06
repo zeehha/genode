@@ -41,7 +41,7 @@ void Vm::_load_initrd()
 Vmm::Cpu & Vm::boot_cpu()
 {
 	if (!_cpus[0].constructed())
-		_cpus[0].construct(*this, _vm, _bus, _gic, _env, _heap, _env.ep());
+		_cpus[0].construct(*this, _vm, _bus, _gic, _env, _heap, _env.ep(), _tester);
 	return *_cpus[0];
 }
 
@@ -55,9 +55,15 @@ Vm::Vm(Genode::Env & env)
   _virtio_console("HVC", VIRTIO_CONSOLE_MMIO_START, VIRTIO_CONSOLE_MMIO_SIZE,
                   VIRTIO_CONSOLE_IRQ, boot_cpu(), _bus, _ram, env),
   _virtio_net("Net", VIRTIO_NET_MMIO_START, VIRTIO_NET_MMIO_SIZE,
-              VIRTIO_NET_IRQ, boot_cpu(), _bus, _ram, env)
+              VIRTIO_NET_IRQ, boot_cpu(), _bus, _ram, env),
+  _tester(_env, _vm, _vm_ram)
 {
-	_vm.attach(_vm_ram.cap(), RAM_START);
+	/* start the VM without S2 translation;
+	 * this causes immediately an exception;
+	 * setup S2 translation in exception
+	 * handling (see cpu_base.cc)
+	 */
+//	_vm.attach(_vm_ram.cap(), RAM_START);
 
 	_load_kernel();
 	_load_dtb();
@@ -67,7 +73,7 @@ Vm::Vm(Genode::Env & env)
 		Genode::Affinity::Space space = _env.cpu().affinity_space();
 		Genode::Affinity::Location location(space.location_of_index(i));
 		_eps[i].construct(_env, STACK_SIZE, "vcpu ep", location);
-		_cpus[i].construct(*this, _vm, _bus, _gic, _env, _heap, *_eps[i]);
+		_cpus[i].construct(*this, _vm, _bus, _gic, _env, _heap, *_eps[i], _tester);
 	}
 
 	Genode::log("Start virtual machine ...");

@@ -16,6 +16,7 @@
 
 #include <exception.h>
 #include <generic_timer.h>
+#include <tester.h>
 
 #include <base/env.h>
 #include <base/heap.h>
@@ -60,7 +61,8 @@ class Vmm::Cpu_base
 		         Gic                     & gic,
 		         Genode::Env             & env,
 		         Genode::Heap            & heap,
-		         Genode::Entrypoint      & ep);
+		         Genode::Entrypoint      & ep,
+		         Tester	                 & tester);
 
 		unsigned           cpu_id() const;
 		void               run();
@@ -210,6 +212,7 @@ class Vmm::Cpu_base
 
 		Gic::Gicd_banked                  _gic;
 		Generic_timer                     _timer;
+		Tester                          & _tester;
 
 		void _handle_nothing() {}
 		bool _handle_sys_reg();

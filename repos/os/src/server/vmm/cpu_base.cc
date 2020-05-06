@@ -108,6 +108,12 @@ void Cpu_base::_handle_sync()
 	case Esr::Ec::BRK:
 		_handle_brk();
 		return;
+		/* Missing S2 translation causes instruction fault;
+		 * tester makes RPC call to set it up. (see tester.cc)
+		 * */
+	case 0x20:
+		_tester.attach_ram();
+		break;
 	default:
 		throw Exception("Unknown trap: ",
 		                Esr::Ec::get(_state.esr_el2));
@@ -190,7 +196,8 @@ Cpu_base::Cpu_base(Vm                      & vm,
                    Gic                     & gic,
                    Genode::Env             & env,
                    Genode::Heap            & heap,
-                   Genode::Entrypoint      & ep)
+                   Genode::Entrypoint      & ep,
+                   Tester                  & tester)
 : _vm(vm),
   _vm_session(vm_session),
   _heap(heap),
@@ -200,4 +207,5 @@ Cpu_base::Cpu_base(Vm                      & vm,
   })),
   _state(*((State*)env.rm().attach(_vm_session.cpu_state(_vcpu_id)))),
   _gic(*this, gic, bus),
-  _timer(env, ep, _gic.irq(VTIMER_IRQ), *this) { }
+  _timer(env, ep, _gic.irq(VTIMER_IRQ), *this),
+  _tester(tester) { }
